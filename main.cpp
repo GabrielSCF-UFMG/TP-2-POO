@@ -1,27 +1,36 @@
 #include<iostream>
 
-#include "Cliente.cpp"
-#include "Exception.cpp"
+#include "Cliente.h"
 
 
 int main(){
 	
 	
 	//Construtor do Cliente:
-	(CPF, NOME, ENDERECO, TEM CELULAR?);
+	//(CPF, NOME, ENDERECO, TEM CELULAR?);
+	
+	//Construtor do Plano:
+	//NOME DO PLAN, VALOR MINUTO (0,valor), VELOCIDADE(Mbps), FRANQUIA (Gb), VELALEM(Kbps)
 	
 	
-	try{
-	Cliente Clovis("000.000.000-01","Clovis","Rua Um, Bairro Primeiro",false); 
-	}
+	Plano p1("HELLOW 150 MB 30 Gb", 50, 150, 30, 200);
+	Plano p2("HELLOW 200 MB 50 Gb", 50, 200, 50, 200);
+	
+	
+	Cliente jao("000.000.000-99", "Jao da Silva","Rua Um",false);
+	
+	jao.interface();
+	
+	
+	jao.getNewCellPhone(1,p1);
+	
+	jao.interface();
 	
 	
 	
-	c.interface();
 	
 	
-	
-	
+	return 0;
 	
 	
 }
