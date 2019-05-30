@@ -14,7 +14,7 @@ private:
 
 public:
 
-    Celular(double n,Plano p){
+    Celular(double n,Plano &p){
         numero = n;
         plano = p;
         proxNumCelular++;
@@ -22,6 +22,7 @@ public:
     Celular(const Celular &c){
         numero = c.numero;
         plano = c.plano;
+        ligacoes = c.ligacoes;
     }
 
     double getNumero(){return numero;}
@@ -33,19 +34,25 @@ public:
         plano.setPlano(pN,vMin,vel,fran,vAlem);
     }
 
-    void newLigacaoCelular(Date &d,double dur,Plano &p,double num){//Duracao em minutos
-        newLigacaoSimples(d,dur,p,num,ligacoes);
+    void newLigacaoCelularSimples(Date &d,double dur,Plano &p,double num,int i){//Duracao em minutos, i  indica qual celualr deseja fazer a ligacao
+        ligacoes[i].newLigacaoSimples(d,dur,p,num);
     }
 
-    void interfaceCelulares(){
+    void newLigacaoCelularDados(Data &d,double dur,Plano &p,double down,double up,int i){
+        ligacoes[i].newLigacaoDados(d,dur,p,down,up);
+    }
+
+    void interfaceCelulares(int i){
 
         cout<<"Numero:"<<numero<<endl;
-        cout<<"Plano:"<<plano.interfacePlano()<<endl;
-        cout<<"Lista de ligacoes:"<<ligacoes.interfaceLigacoes()<<endl;
+        cout<<"Plano:"<<endl;plano.interfacePlano();
+        cout<<"Lista de ligacoes:"<<endl;ligacoes[i].interfaceLigacoes();
         cout<<"Proximo numero"<<proxNumCelular<<endl;
         cout<<endl;
     }
 
+    int num(){return proxNumCelular;};
+
 };
-int Celular::proxNumCelular = 0
+int Celular::proxNumCelular = 0;
 

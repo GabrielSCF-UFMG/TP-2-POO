@@ -1,46 +1,55 @@
 #include<iostream>
 #include<vector>
-
+#include "Celular.cpp"
 
 using namespace std;
 
-class Cliente: public Celulares{
+class Cliente{
 
 private:
     string CPF;
     string nome;
-    string endereço;
+    string endereco;
     vector <Celular> celulares;
     bool hasCell;
 
 public:
-    Cliente(string C = "123.456.789-99",string n = "Cleiton",string e = "Rua",bool h = false):CPF(C),nome(n),endereço(e),hasCell(h){}
+    Cliente(string C = "123.456.789-99",string n = "Cleiton",string e = "Rua",bool h = false):CPF(C),nome(n),endereco(e),hasCell(h){}
     //Construtor de copia
-    Cliente(const Cliente &c): CPF(c.CPF),nome(c.nome),endereço(c.endereço),hasCell(c.hasCell){}
+    Cliente(const Cliente &c): CPF(c.CPF),nome(c.nome),endereco(c.endereco),hasCell(c.hasCell){}
 
     string getCPF(){return CPF;}
     string getNome(){return nome;}
-    string getEndereço(){return endereço;}
-    vector <Celular> getCelular(){return *celulares;}
+    string getEndereco(){return endereco;}
+    vector <Celular> getCelular(){return celulares;}
 
     void setCPF(string C){CPF = C;}
     void setNome(string n){nome = n;}
-    void setEndereço(string e){endereço = e;}
+    void setEndereco(string e){endereco = e;}
 
-    void getNewCellPhone(double number,string planName,double valMin,double vel,
-                         double fran,double velAlem){
-        celulares.push_back(Celular(number,this->CPF,this->nome
-        ,this->endereço,planName,valMin,vel,fran,velAlem));
+    void getNewCellPhone(double number,Plano &p){
+        celulares.push_back(Celular(number,p));
 
-        for (i = 0; i< celulares.size();i++){
-            if celulares[i].numero = number{
-                cout<<"Esse numero ja existe"<<endl
-                celulares.pop_back;
+        for (int i = 0; i< celulares.size();i++){
+            if (celulares[i].getNumero() == number){
+                cout<<"Esse numero ja existe"<<endl;
+                celulares.pop_back();
                 break;
             }
         }
 
         }
+
+     virtual void interface(){
+
+        cout<<"CPF do cliente:"<<CPF <<endl;
+        cout<<"Nome do cliente:"<<nome <<endl;
+        cout<<"Endereco do cliente:"<<endereco <<endl;
+        cout<<"Numero de celulares do cliente"<<celulares.num()<<endl;;
+        cout<<"Ligacoes do cliente:";
+        for(int i = 0;i < )
+
+     }
 
 
 };
