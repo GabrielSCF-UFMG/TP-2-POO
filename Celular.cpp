@@ -10,14 +10,13 @@ private:
     double numero; //Começa em 0 e incrementa 1 a cada novo numero
     Plano plano;
     vector <Ligacao> ligacoes;
-    int static proxNumCelular;
 
 public:
 
     Celular(double n,Plano &p){
         numero = n;
         plano = p;
-        proxNumCelular++;
+        
     };
     Celular(const Celular &c){
         numero = c.numero;
@@ -38,7 +37,7 @@ public:
         ligacoes[i].newLigacaoSimples(d,dur,p,num);
     }
 
-    void newLigacaoCelularDados(Data &d,double dur,Plano &p,double down,double up,int i){
+    void newLigacaoCelularDados(Date &d,double dur,Plano &p,double down,double up,int i){
         ligacoes[i].newLigacaoDados(d,dur,p,down,up);
     }
 
@@ -47,12 +46,9 @@ public:
         cout<<"Numero:"<<numero<<endl;
         cout<<"Plano:"<<endl;plano.interfacePlano();
         cout<<"Lista de ligacoes:"<<endl;ligacoes[i].interfaceLigacoes();
-        cout<<"Proximo numero"<<proxNumCelular<<endl;
         cout<<endl;
     }
 
-    int num(){return proxNumCelular;};
 
 };
-int Celular::proxNumCelular = 0;
 

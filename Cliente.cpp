@@ -10,8 +10,9 @@ private:
     string CPF;
     string nome;
     string endereco;
-    vector <Celular> celulares;
+    vector <Celular> celulares; //VETOR DE CELULARES DO CLIENTE
     bool hasCell;
+    int static proxNumCelular;
 
 public:
     Cliente(string C = "123.456.789-99",string n = "Cleiton",string e = "Rua",bool h = false):CPF(C),nome(n),endereco(e),hasCell(h){}
@@ -28,7 +29,8 @@ public:
     void setEndereco(string e){endereco = e;}
 
     void getNewCellPhone(double number,Plano &p){
-        celulares.push_back(Celular(number,p));
+        hasCell = true;
+		celulares.push_back(Celular(number,p));
 
         for (int i = 0; i< celulares.size();i++){
             if (celulares[i].getNumero() == number){
@@ -37,7 +39,7 @@ public:
                 break;
             }
         }
-
+			proxNumCelular = celulares.size() + 1;//=celulares.size()
         }
 
      virtual void interface(){
@@ -45,11 +47,20 @@ public:
         cout<<"CPF do cliente:"<<CPF <<endl;
         cout<<"Nome do cliente:"<<nome <<endl;
         cout<<"Endereco do cliente:"<<endereco <<endl;
-        cout<<"Numero de celulares do cliente"<<celulares.num()<<endl;;
+        if(hasCell = false){
+        	cout<<"Esse cliente não tem um celular!"<<endl;
+		}else{
+		cout<<"Numero de celulares do cliente:"<<celulares.size()<<endl;
         cout<<"Ligacoes do cliente:";
-        for(int i = 0;i < )
+        for(int i = 0;i < celulares.size();i++){
+        	celulares[i].interfaceCelulares(i);
+		}
+		}
 
      }
-
-
+	
+	 int getNumCelulares(){return proxNumCelular;};
+	
 };
+ int Cliente::proxNumCelular = 0;
+
