@@ -1,8 +1,6 @@
 #include<iostream>
 
-#include "Celular.cpp"
-#include "PrePago.cpp"
-#include "PosPago.cpp"
+#include "Date.cpp"
 
 using namespace std;
 
@@ -14,10 +12,14 @@ private:
     double velocidade;
     double franquia;
     double velocAlem;
+
 public:
-    Plano(string planName,double valMin,double vel,double fran,double velAlem):
+    Plano(string planName ="Plano",double valMin = 1,double vel = 1,double fran = 1,double velAlem = 1):
         nome(planName),valorMinuto(valMin),velocidade(vel),
         franquia(fran),velocAlem(velAlem){}
+
+
+    double getVM(){return valorMinuto;};
 
     void setPlano(string pN,double vMin,double vel,double fran,double vAlem){
         nome = pN;
@@ -41,48 +43,40 @@ public:
 
 };
 
-class PrePado:public Plano{
+class PrePado:public Plano,Date{
 
 private:
     double credito;
-    Date validade;
+    Date validade;//Dia
+    Plano plano;
+
 public:
 
-    PrePado(double cr,int valDia):credito(cr),validade = Date(valDia){}
-
-    void val(){return validade.dia;}
-
-    double restanteCreditos(){
-        double auxGastos = 0.0;
-
-        for (i = 0;i < ligaçoe.size();i++){
-            auxGastos += Celular.ligaçoes[i].cost;
-        }
-        double auxCredito = credito;
-
-        return auxCredito-auxGastos;
+    PrePado(double cr,Date val,Plano p){
+        credito = cr;
+        validade = val;
+        plano = p;
     }
 
-    bool foraDaValidade(Date now){//Vencido?
-        if now.dia <= validade.dia {
-            return false;
-        }else
-            return true;
-    }
+    int getVal(){return validade.getDia();}
+
+    double restanteCreditos(double gasto){return credito-gasto;}
+
+
+    //Vencido?
+    bool foraDaValidade(Date now){now.getDia() <= validade.getDia() ? true : false;}
 
 };
 
-class PosPago:public Plano{
+class PosPago:public Plano,Date{
 private:
     Date vencimento;
 public:
-    PrePado(int venDia):vencimento = Date(venDia){}
-
-    void getVencimento(){return vencimento.dia;}
-    bool vencido(Date now){
-        if now.dia <= validade.dia {
-            return false;
-        }else
-            return true;
+    PosPado(Date v){
+        vencimento = v;
     }
+
+    int getVencimento(){return vencimento.getDia();}
+
+    bool vencido(Date now){now.getDia() <= vencimento.getDia() ? true : false;}
 };

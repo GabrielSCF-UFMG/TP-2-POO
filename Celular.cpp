@@ -4,7 +4,7 @@
 
 using namespace std;
 
-class Celular: public Ligacao{
+class Celular{
 
 private:
     double numero; //Começa em 0 e incrementa 1 a cada novo numero
@@ -28,13 +28,13 @@ public:
 
     double getPlano(){plano.interfacePlano();}
 
-    void setNumero(double numero){numero = num;}
+    void setNumero(double num){numero = num;}
     void setPlanoCelular(string pN,double vMin,double vel,double fran,double vAlem){
         plano.setPlano(pN,vMin,vel,fran,vAlem);
     }
 
-    void newLigacaoCelular(int dia,int hr,double dur,Celular &cellRecebeu){//Duracao em minutos
-        ligacoes.newLigacao(dia,hr,dur,plano,*this,cellRecebeu);
+    void newLigacaoCelular(Date &d,double dur,Plano &p,double num){//Duracao em minutos
+        newLigacaoSimples(d,dur,p,num,ligacoes);
     }
 
     void interfaceCelulares(){
