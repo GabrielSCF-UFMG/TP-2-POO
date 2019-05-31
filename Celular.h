@@ -14,6 +14,7 @@ private:
     double numero; //Começa em 0 e incrementa 1 a cada novo numero
     Plano plano;
     vector <Ligacao> ligacoes;
+    //Ligacao ligacoes;
     //static vector <double> numerosCelular;
     int static numDeCelulares;
 
@@ -22,8 +23,10 @@ public:
     Celular(double n,Plano &p){
         numero = n;
         plano = p;
+        //ligacoes = lig;
         numDeCelulares++;
     };
+
     Celular(const Celular &c){
         setNumero(c.numero);
         plano = c.plano;
@@ -42,15 +45,24 @@ public:
     void setPlanoCelular(string pN,double vMin,double vel,double fran,double vAlem){
         plano.setPlano(pN,vMin,vel,fran,vAlem);
     }
+
                             //d = Dia e hora
-    virtual void newLigacaoSimples(Date &d,double dur,Celular cDest){//Duracao em minutos, i  indica qual celualr deseja fazer a ligacao
+    virtual void newLigacaoSimples(Date &d,double dur,Celular &cDest){//Duracao em minutos, i  indica qual celualr deseja fazer a ligacao
         cout<<"\nDiscando no celular..."<<endl;
         ligacoes[ligacoes.size()].newLigacaoSimples(d,dur,cDest.plano,cDest.numero);
+        //ligacoes.newLigacaoSimples(d,dur,cDest.plano,cDest.numero);
     }
 
     virtual void newLigacaoDados(Date &d,double dur,double down,double up){//Plano do proprio celular
         ligacoes[ligacoes.size()].newLigacaoDados(d,dur,this->plano,down,up);
+        //ligacoes.newLigacaoDados(d,dur,this->plano,down,up);
     }
+
+    void IncluirLigacao(const Ligacao &l){
+        ligacoes.push_back(l);
+    }
+
+
 
     void interfaceCelulares(){
         cout<<"\nNumero do celular:"<<numero<<endl;
@@ -59,7 +71,7 @@ public:
             cout<<"---O celular nao tem nenhum ligacao---"<<endl;
         }else{
         for(int i = 0;i< ligacoes.size();i++){
-        cout<<"-----Interface da Ligacao "<<i<<"-----"<<endl;
+        cout<<"-----Interface da Ligacao "<<"-----"<<endl;
         ligacoes[i].interfaceLigacoes();
         }
         cout<<endl;

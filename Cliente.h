@@ -34,7 +34,7 @@ public:
     string getNome(){return nome;}
     string getEndereco(){return endereco;}
     vector <Celular> getCelulares(){return celulares;}//Retorna todos os celulares do cliente por vector
-    Celular getCelular(int i){return celulares[i];} //Retorna um celular expecifico do cliente
+    Celular &getCelular(int i){return celulares[i];} //Retorna um celular expecifico do cliente
 
     void setCPF(string C){CPF = C;}
     void setNome(string n){nome = n;}
@@ -82,7 +82,7 @@ public:
 
      }
 
-     void solicitarLigacaoS(int i, Date &d,double dur,Celular c){ //Celualr a ligar
+     void solicitarLigacaoS(int i, Date &d,double dur,Celular &c){ //Celualr a ligar
         celulares[i].newLigacaoSimples(d,dur,c);
      }
 

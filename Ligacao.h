@@ -7,66 +7,10 @@
 #include<cmath>
 
 #include "Plano.h"
+#include "LigacaoSimples.h"
+#include "LigacaoDados.h"
 
 using namespace std;
-
-class LigacaoDados{
-
-private:
-    double Download;
-    double Upload;
-
-public:
-    LigacaoDados(double dadosD,double dadosU):Download(dadosD),Upload(dadosU){}
-
-    double getDownload(){ return Download;}
-    double getUpload(){ return Upload;}
-
-    void interface(){
-
-        cout<<"Download:"<<Download<<endl;
-        cout<<"Upload:"<<Upload<<endl;
-        cout<<endl;
-    }
-
-};
-
-class LigacaoSimples{
-
-private:
-
-    Date datahora;
-    double duracao;
-    double custo;
-    double numTelefone;
-
-public:
-    LigacaoSimples(Date &dataLig,double dur,Plano p,double num){
-        duracao = dur;
-        custo = (p.getVM() * dur)*pow(10,-2);
-        datahora = dataLig;
-        numTelefone = num;
-    };
-
-    int getDateDia(){return datahora.getDia();};
-    int getDateHora(){return datahora.getHora();};
-    double getNum(){return numTelefone;};
-    double getDuracao(){return duracao;};
-    double getCusto(){return custo;};
-
-    void setNum(double num){numTelefone = num;};
-
-    void interface(){
-
-       cout<<"\nData(dia,hora): "<<getDateDia()<<","<<getDateHora()<<endl;
-       cout<<"Duracao: "<<duracao<<endl;
-       cout<<"Custo: "<<custo<<" reais!"<<endl;
-       cout<<"Numero Telefone: "<<numTelefone<<endl;
-       cout<<endl;
-
-    }
-
-};
 
 class Ligacao{
 
@@ -80,27 +24,14 @@ private:
     Plano plano;
 
 public:
+
     Ligacao(Date &dataLig,double dur,Plano &p){
         plano = p;
         duracao = dur;
         custo = (p.getVM() * dur)*pow(10,-2);
         datahora = dataLig;
-    }
-    /*
-    Ligacao(Date &dataLig,double dur,Plano &p,double num){
-        plano = p;
-        duracao = dur;
-        custo = p.getVM() * dur;
-        datahora = dataLig;
-        ligSim.push_back(LigacaoSimples(dataLig,dur,p,num));
-    }
-    Ligacao(Date &dataLig,double dur,Plano &p,double down,double up){
-        plano = p;
-        duracao = dur;
-        custo = p.getVM() * dur;
-        datahora = dataLig;
-        ligDados.push_back(LigacaoDados(down,up));
-    }*/
+    }hh
+
     Ligacao(const Ligacao &c){
         plano = c.plano;
         duracao = c.duracao;
@@ -110,14 +41,15 @@ public:
         ligDados = c.ligDados;
     }
 
-    void newLigacaoSimples(Date &dataLigacao, double dur, Plano p, double num){
-        cout<<"Realizando a ligacao..."<<endl;
+    void newLigacaoSimples(Date &dataLigacao, double dur, Plano &p, double num){
+        cout<<"Realizando a ligacao simples..."<<endl;
         //Ligacao nova(dataLigacao,dur,p,num);
         //ligacoes[ligacoes.size()].ligSim.push_back(LigacaoSimples(dataLigacao,dur,p,num));
         ligSim.push_back(LigacaoSimples(dataLigacao,dur,p,num));
     }
 
-    void newLigacaoDados(Date &dataLigacao,double dur,Plano p,double down,double up){
+    void newLigacaoDados(Date &dataLigacao,double dur,Plano &p,double down,double up){
+        cout<<"Realizando a ligacao dados..."<<endl;
         //Ligacao nova(dataLigacao,dur,p,down,up);
         //ligacoes.push_back(nova);
         ligDados.push_back(LigacaoDados(down,up));
@@ -128,6 +60,7 @@ public:
     int getDate(){return datahora.getDia();};
     double getDuracao(){return duracao;};
     double getCusto(){return custo;};
+    int getNumLigacoes(){return ligDados.size()+ligSim.size();};
     //Ligacao getLig(int i){return ligacoes[i];};
     LigacaoSimples getLigsimples(int i){return ligSim[i];};
     LigacaoDados getDados(int i){return ligDados[i];};

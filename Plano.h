@@ -5,6 +5,8 @@
 #include<iostream>
 
 #include "Date.h"
+#include "PrePago.h"
+#include "PosPago.h"
 
 using namespace std;
 
@@ -46,44 +48,5 @@ public:
 
 
 };
-
-class PrePado:public Plano,Date{
-
-private:
-    double credito;
-    Date validade;//Dia
-    Plano plano;
-
-public:
-
-    PrePado(double cr,Date val,Plano p){
-        credito = cr;
-        validade = val;
-        plano = p;
-    }
-
-    int getVal(){return validade.getDia();}
-
-    double restanteCreditos(double gasto){return credito-gasto;}
-
-
-    //Vencido?
-    bool foraDaValidade(Date now){now.getDia() <= validade.getDia() ? true : false;}
-
-};
-
-class PosPago:public Plano,Date{
-private:
-    Date vencimento;
-public:
-    PosPado(Date v){
-        vencimento = v;
-    }
-
-    int getVencimento(){return vencimento.getDia();}
-
-    bool vencido(Date now){now.getDia() <= vencimento.getDia() ? true : false;}
-};
-
 
 #endif
