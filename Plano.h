@@ -35,11 +35,11 @@ public:
 
     void interfacePlano(){
 
-        cout<<"Nome do plano:"<<nome<<endl;
-        cout<<"Valor do minuto: RS 0,"<<valorMinuto<<endl<<"!"<<endl;
-        cout<<"Velocidade da internet:"<<velocidade<<" Mbps!"<<endl;
-        cout<<"Franquia:"<<franquia<<"Gb!" <<endl;
-        cout<<"Velocidade além da Franquia:"<<velocAlem<<"Kbps!"<<endl;
+        cout<<"Nome do plano: "<<nome<<endl;
+        cout<<"Valor do minuto: RS 0,"<<valorMinuto<<"!"<<endl;
+        cout<<"Velocidade da internet: "<<velocidade<<" Mbps!"<<endl;
+        cout<<"Franquia: "<<franquia<<"Gb!" <<endl;
+        cout<<"Velocidade alem da Franquia: "<<velocAlem<<"Kbps!"<<endl;
         cout<<endl;
 
     }

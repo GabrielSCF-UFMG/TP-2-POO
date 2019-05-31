@@ -17,6 +17,7 @@ public:
     Date(int h = 0,int d = 0,int m = 0,int a = 0):hora(h),dia(d),mes(m),ano(a){};
     Date(const Date &d){dia = d.dia;mes = d.mes;ano = d.ano;};
 
+    int getHora(){return hora;};
     int getDia(){return dia;};
     int getMes(){return mes;};
     int getAno(){return ano;};
