@@ -7,7 +7,7 @@
 
 using namespace std;
 
-class PrePado{
+class PrePago{
 
 private:
     double credito;
@@ -15,12 +15,17 @@ private:
 
 public:
 
-    PrePado(double cr,Date val){
+    PrePago(double cr,Date val){
         credito = cr;
         validade = val;
     }
+    PrePago(const PrePago &p){
+        credito = p.credito;
+        validade = p.validade;
+    }
 
     int getVal(){return validade.getDia();}
+    void setCredito(double c){credito += c;}
 
     double restanteCreditos(double gasto){return credito-gasto;}
 

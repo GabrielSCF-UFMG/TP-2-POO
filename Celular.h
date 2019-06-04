@@ -5,6 +5,7 @@
 #include<iostream>
 #include<vector>
 #include "Ligacao.h"
+#include "Cliente.h"
 
 using namespace std;
 
@@ -14,29 +15,28 @@ private:
     double numero; //Começa em 0 e incrementa 1 a cada novo numero
     Plano plano;
     vector <Ligacao> ligacoes;
-    //Ligacao ligacoes;
-    //static vector <double> numerosCelular;
-    int static numDeCelulares;
+    int static proxNum;
 
 public:
 
-    Celular(double n,Plano &p){
-        numero = n;
+    Celular(Plano &p){
+        numero = proxNum;
         plano = p;
-        //ligacoes = lig;
-        numDeCelulares++;
+        proxNum += proxNum/10;
     };
 
     Celular(const Celular &c){
         setNumero(c.numero);
         plano = c.plano;
         ligacoes = c.ligacoes;
-        numDeCelulares--;
+        proxNum -= proxNum/10;
     }
 
     double getNumero(){return numero;}
 
-    double getPlano(){plano.interfacePlano();}
+    Plano &getPlano(){return plano;}
+
+    vector <Ligacao> &getLigacoes(){return ligacoes;}
 
     void setNumero(double num){
         numero = num;
@@ -62,26 +62,21 @@ public:
         ligacoes.push_back(l);
     }
 
-
-
-    void interfaceCelulares(){
-        cout<<"\nNumero do celular:"<<numero<<endl;
-        plano.interfacePlano();
-        if(ligacoes.size() == 0){
-            cout<<"---O celular nao tem nenhum ligacao---"<<endl;
-        }else{
-        for(int i = 0;i< ligacoes.size();i++){
-        cout<<"-----Interface da Ligacao "<<"-----"<<endl;
-        ligacoes[i].interfaceLigacoes();
+    void acrecentarCreditos(double nCreditos){
+        if(plano.getTipo() == true){
+            this->plano.getPre().setCredito(nCreditos);//Acrescenta 'nCreditos' ao celular;
         }
-        cout<<endl;
+        double gasto = 0;
+        for (int i = 0;i <ligacoes.size();i++){
+            gasto += ligacoes[i].gastosLig();
         }
+            cout<<"Creditos disponiveis:"<<plano.getPre().restanteCreditos(gasto)<<endl;
     }
 
 
 };
 //vector <double> Celular::numerosCelular;
-int Celular::numDeCelulares = 0;
+int Celular::proxNum = 100001;
 
 #endif
 

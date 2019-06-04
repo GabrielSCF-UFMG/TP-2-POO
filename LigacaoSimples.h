@@ -30,16 +30,6 @@ public:
 
     void setNum(double num){numTelefone = num;};
 
-    void interface(){
-
-       cout<<"\nData(dia,hora): "<<getDateDia()<<","<<getDateHora()<<endl;
-       cout<<"Duracao: "<<duracao<<endl;
-       cout<<"Custo: "<<custo<<" reais!"<<endl;
-       cout<<"Numero Telefone: "<<numTelefone<<endl;
-       cout<<endl;
-
-    }
-
 };
 
 

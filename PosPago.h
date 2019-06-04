@@ -12,8 +12,11 @@ class PosPago{
 private:
     Date vencimento;
 public:
-    PosPado(Date v){
+    PosPago(Date v){
         vencimento = v;
+    }
+    PosPago(const PosPago &p){
+        vencimento = p.vencimento;
     }
 
     int getVencimento(){return vencimento.getDia();}

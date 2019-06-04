@@ -30,7 +30,7 @@ public:
         duracao = dur;
         custo = (p.getVM() * dur)*pow(10,-2);
         datahora = dataLig;
-    }hh
+    }
 
     Ligacao(const Ligacao &c){
         plano = c.plano;
@@ -46,24 +46,35 @@ public:
         //Ligacao nova(dataLigacao,dur,p,num);
         //ligacoes[ligacoes.size()].ligSim.push_back(LigacaoSimples(dataLigacao,dur,p,num));
         ligSim.push_back(LigacaoSimples(dataLigacao,dur,p,num));
+        if( (plano.getPre().restanteCreditos(gastosLig())) <= 0){
+                cout<<"Creditos insuficientes para realizar tal ligacao!Adicione creditos ao telefone!"<<endl;
+                ligSim.pop_back();
+        }
     }
 
     void newLigacaoDados(Date &dataLigacao,double dur,Plano &p,double down,double up){
         cout<<"Realizando a ligacao dados..."<<endl;
         //Ligacao nova(dataLigacao,dur,p,down,up);
         //ligacoes.push_back(nova);
-        ligDados.push_back(LigacaoDados(down,up));
+        ligDados.push_back(LigacaoDados(down,up,p.getVel()));
     }
 
+    double gastosLig(){
+         double gasto;
+         for(int i = 0;i<ligSim.size();i++){
+            gasto += ligSim[i].getCusto();
+        }
+        return gasto;
+    }
 
     //Gets
     int getDate(){return datahora.getDia();};
     double getDuracao(){return duracao;};
     double getCusto(){return custo;};
     int getNumLigacoes(){return ligDados.size()+ligSim.size();};
-    //Ligacao getLig(int i){return ligacoes[i];};
-    LigacaoSimples getLigsimples(int i){return ligSim[i];};
-    LigacaoDados getDados(int i){return ligDados[i];};
+    Plano &getPlano(){return plano;};
+    vector <LigacaoSimples> &getLigsimples(){return ligSim;};
+    vector <LigacaoDados> &getLigDados(){return ligDados;};
 
     //Sets
     void setDate(Date &d){datahora = d;};
@@ -72,21 +83,6 @@ public:
     //void setLig(int i,Ligacao &l){ligacoes[i] = l;};
     void setLigsimples(int i, LigacaoSimples &ls){ligSim[i] = ls;};
     void setDados(int i, LigacaoDados ld){ligDados[i] = ld;};
-
-    void interfaceLigacoes(){
-
-        cout<<"\nLigacoes simples:"<<endl;
-        for(int i = 0;i<ligSim.size();i++){
-            cout<<i<<":"<<endl;
-            ligSim[i].interface();
-        }
-        cout<<"\nLigacao dados:"<<endl;
-        for(int i = 0;i<ligSim.size();i++){
-            cout<<i<<":"<<endl;
-            ligDados[i].interface();
-        }
-
-    }
 
 };
 

@@ -1,7 +1,11 @@
+#ifdef ERRO_H
+
+#define ERRO_H
+
 #include<iostream>
 #include<string>
 
-//using namespace std;
+using namespace std;
 
 class Erro{
 
@@ -20,3 +24,5 @@ class Erro{
 		}
 
 };
+
+#endif // ERRO_H

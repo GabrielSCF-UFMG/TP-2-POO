@@ -8,21 +8,18 @@ using namespace std;
 class LigacaoDados{
 
 private:
-    double Download;
-    double Upload;
+
+    double Download; //Vel do plano
+    double Upload; //Vel do plano/10
+    double velocidade;
 
 public:
-    LigacaoDados(double dadosD,double dadosU):Download(dadosD),Upload(dadosU){}
+    LigacaoDados(double dadosD,double dadosU,double vel):Download(dadosD),Upload(dadosU),velocidade(vel){}
 
     double getDownload(){ return Download;}
     double getUpload(){ return Upload;}
-
-    void interface(){
-
-        cout<<"Download:"<<Download<<endl;
-        cout<<"Upload:"<<Upload<<endl;
-        cout<<endl;
-    }
+    double getVelDownload(){return velocidade;}
+    double getVelUpload(){return velocidade/10;}
 
 };
 
