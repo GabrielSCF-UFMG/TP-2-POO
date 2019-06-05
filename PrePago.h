@@ -33,6 +33,13 @@ public:
     //Vencido?
     bool foraDaValidade(Date now){now.getDia() <= validade.getDia() ? true : false;}
 
+    ~PrePago(){
+
+        credito = 0;
+        validade.~Date();
+
+    }
+
 };
 
 

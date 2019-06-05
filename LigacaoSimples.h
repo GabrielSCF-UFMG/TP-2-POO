@@ -3,6 +3,8 @@
 
 #include<iostream>
 
+#include "Date.h"
+
 using namespace std;
 
 class LigacaoSimples{
@@ -22,13 +24,25 @@ public:
         numTelefone = num;
     };
 
-    int getDateDia(){return datahora.getDia();};
-    int getDateHora(){return datahora.getHora();};
+    Date &getDate(){return datahora;};
+    int getDia(){return datahora.getDia();};
+    int getHora(){return datahora.getHora();};
+    int getMes(){return datahora.getMes();};
+    int getAno(){return datahora.getAno();};
     double getNum(){return numTelefone;};
     double getDuracao(){return duracao;};
     double getCusto(){return custo;};
 
     void setNum(double num){numTelefone = num;};
+
+    ~LigacaoSimples(){
+
+        datahora.~Date();
+        duracao = 0;
+        custo = 0;
+        numTelefone = 0;
+
+    }
 
 };
 

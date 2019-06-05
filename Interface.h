@@ -14,25 +14,41 @@ private:
     vector <Cliente>cliente;
     vector <Plano> plano;
     vector <Celular> celular;
-    vector <Ligacao> ligacao;
+    vector <Date> dataLig;
+    static int num;
 
 public:
+
+    Interface(){};
 
     vector <Plano>   &getPlano  (){return plano  ;};
     vector <Cliente> &getCliente(){return cliente;};
     vector <Celular> &getCelular(){return celular;};
-    vector <Ligacao> &getLigacao(){return ligacao;};
 
     bool verificaDadosNovoCliente(string CPF,string nome);
     bool verificaPlano(string pName);
+    bool verificaCelular(double num);
+    bool verificaDataLig(int i,Date &d);
+    bool testaValidade(int i,Date &d);
+    bool testaFranquia(int i);
+
+
+    int retornaCelular(double num);
+
+    void addCreditos();
+    void regLigacao();
     void cadastrarCliente();
     void cadastrarPlano();
     void cadastrarCelular();
     void novaLigacao();
 
     void listarPlanos();
-    void listarCliente();
-
+    void listarClientes();
+    void listarCelulares();
+    void listarLigacoesSimples(int i,LigacaoSimples &ls);
+    void listarLigacoesDados(int i,LigacaoDados &ld);
+    void listarValorDaConta();
+    void listarCreditosData();
 
     void interfacePlano(Plano &p);
     void interfaceCelular(Celular &c);
@@ -41,12 +57,28 @@ public:
     void interfaceLigSimples(LigacaoSimples &ls);
     void interfaceLigDados(LigacaoDados &ld);
 
+    void dadosPacoteInternet();
+    void extratoSimples();
+    void extratoDados();
 
+    void informarVenciCred();
+    void informarFranquia();
 
+    ~Interface(){
 
-
+        for(int i = 0;i < cliente.size();i++){
+            cliente[i].~Cliente();
+        }
+        for(int i = 0;i < plano.size();i++){
+            plano[i].~Plano();
+        }
+        for(int i = 0;i < celular.size();i++){
+            celular[i].~Celular();
+        }
+    }
 
 };
+int Interface::num = 0;
 
 
 #endif // INTERFACE_H

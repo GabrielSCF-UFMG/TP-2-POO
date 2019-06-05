@@ -22,6 +22,13 @@ public:
     int getVencimento(){return vencimento.getDia();}
 
     bool vencido(Date now){now.getDia() <= vencimento.getDia() ? true : false;}
+
+    ~PosPago(){
+
+    vencimento.~Date();
+
+    }
+
 };
 
 #endif // POSPAGO_H

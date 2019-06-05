@@ -4,12 +4,11 @@
 #include<iostream>
 
 
-
 class Exception{
 
     private:
 
-	string  tipo_erro;
+	string tipo_erro;
 
 	public:
 

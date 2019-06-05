@@ -19,6 +19,8 @@ private:
     //int static numDeCelulares;
 
 public:
+    //vector <Celular> celulares;
+
     Cliente(string C = "123.456.789-99",string n = "Cleiton",string e = "Rua",bool h = false):CPF(C),nome(n),endereco(e){};
 
     //Construtor de copia
@@ -26,7 +28,7 @@ public:
 			CPF = c.CPF;
 			nome = c.nome;
 			endereco = c.endereco;
-		}
+    }
 
 
 
@@ -45,14 +47,28 @@ public:
         celulares.push_back(c);
         }
 
-     void solicitarLigacaoS(int i, Date &d,double dur,Celular &c){ //Celualr a ligar
-        celulares[i].newLigacaoSimples(d,dur,c);
+     void newLigacaoSimples(int i, Date &d,double dur,double num){ //Celualr a ligar
+        celulares[i].newLigacaoSimples(d,dur,num);
      }
 
-     void solicitarLigacaoD(int i,Date &d,double dur,double down,double up){
-        celulares[i].newLigacaoDados(d,dur,down,up);
+     void newLigacaoDadosDownload(int i,Date &d,double dur,double down){
+        celulares[i].newLigacaoDadosDownload(d,dur,down);
      }
 
+     void newLigacaoDadosUpload(int i,Date &d,double dur,double up){
+        celulares[i].newLigacaoDadosUpload(d,dur,up);
+     }
+
+     ~Cliente(){
+
+        CPF = "--";
+        nome = "--";
+        endereco = "--";
+        for(int i = 0;i< celulares.size();i++){
+            celulares[i].~Celular();
+        }
+
+     }
 };
 
 

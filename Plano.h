@@ -7,6 +7,7 @@
 #include "Date.h"
 #include "PrePago.h"
 #include "PosPago.h"
+#include "Exception.h"
 
 using namespace std;
 
@@ -32,34 +33,45 @@ public:
         nome = planName;
         valorMinuto = valMin;
         velocidade= vel;
-        franquia= fran;
+        franquia= fran*10*10*10; //Em megabytes
         velocAlem = velAlem;
         tipo = preOrPos;
         validade = val;
         if(tipo == true){
-            nome += "PrePago";
+            nome += " PrePago";
             cout<<"Quantos creditos serao incluidos no plano "<<nome<<"?"<<endl;
             cin>>credito;
             PrePago p(credito,val);
             pre.push_back(p);
             //pre = p;
         }else{
-            nome += "PosPago";
+            nome += " PosPago";
             PosPago a(val);
             pos.push_back(a);
             //pos  = a;
         }
         }
 
-    string getName(){return nome;}
-    double getVM(){return valorMinuto;}
-    double getVel(){return velocidade;}
-    double getFran(){return franquia;}
-    double getVelAlem(){return velocAlem;}
-    double getCred(){return credito;}
+    virtual string getNome(){return nome;}
+    double getVM(){return valorMinuto;}//centavos
+    double getVel(){return velocidade;}//Mbps
+    double getFran(){return franquia;}//Mbs
+    double getVelAlem(){return velocAlem;}//Kbps
+    double getCred(){return credito;}//centavos
     bool getTipo(){return tipo;}
     PrePago &getPre(){return pre[pre.size()];}
     PosPago &getPos(){return pos[pos.size()];}
+    Date &getValidade(){return validade;}
+
+    bool testaValidade(Date &d){
+
+        if( (validade.getDia() >= d.getDia())&&(validade.getMes() == d.getMes())){
+            return false;//Fora da validade
+        }else{
+            return true;
+        }
+
+    }
 
     void setPlano(string pN,double vMin,double vel,double fran,double vAlem){
         nome = pN;
@@ -73,9 +85,41 @@ public:
         validade = d;
     }
 
+    void setAddCreditos(double cred){
+        credito += cred;
+        validade.setAddMes(3);
+    }
 
-    void creditosRestantes(){}
+    void setDecreCreditos(double gasto){
+        credito -= gasto;
+        if(credito < 0){
+            throw Exception("Creditos insuficientes para realizar a ligacao");
+        }
+    }
 
+    void setDecreFran(double gasto){//Gasto em megabytes
+        franquia -= gasto;
+        if(franquia < 0){
+            throw Exception("Creditos insuficientes para realizar a ligacao");
+        }
+    }
+
+    ~Plano(){
+        nome = "--";
+        valorMinuto = 0;
+        velocidade = 0;
+        franquia = 0;
+        velocAlem = 0;
+        credito = 0;
+        tipo = false;
+        validade.~Date();
+        for(int i = 0;i< pre.size();i++){
+            pre[i].~PrePago();
+        }
+        for(int i = 0;i< pos.size();i++){
+            pos[i].~PosPago();
+        }
+    }
 
 };
 
