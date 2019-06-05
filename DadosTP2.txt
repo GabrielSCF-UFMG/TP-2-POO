@@ -1,8 +1,43 @@
-Plano 1:
-Nome:
-Valor do minuto:
+Plano 0: Pre-Pago
+
+Nome: FalaSemParar	
+Valor do minuto: 10 centavos
+Data vencimento: 25/12/2019
+Creditos iniciais: 10000
+
+Plano 1: Pos-Pago
+
+Nome: NavegaSemParar
+Velocidade internet: 200 Mbps
+Franquia: 40 Gb
+Velocidade além: 200 Kbps
+Data vencimento: 27/12/2019
+
+Cliente 0:
+
+CPF: 123
+Nome: Clodoval
+Endereço: Rua 1
+Celular:
+
+Plano : FalaSemPararNa 0
+Numero:
 
 
-Plano2:
 
-Plano3:
+Cliente 1:
+
+CPF: 321
+Nome: Ronaldo
+Endereço Rua 2
+Celular:
+
+Plano : NavegaSemParar 0
+Numero:
+
+
+
+
+
+
+ 
