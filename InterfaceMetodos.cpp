@@ -8,7 +8,7 @@ bool Interface::verificaDadosNovoCliente(string CPF,string nome){
             return false;
         }
         if(cliente[i].getNome() == nome){
-            throw Exception("Existe um cliente cadastrada nesse nome!");
+            throw Exception("Existe um cliente cadastrado nesse nome!");
             return false;
         }
     }
