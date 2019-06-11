@@ -3,7 +3,8 @@
 #define POSPAGO_H
 
 #include "Data.h"
-#include "Exeption.h"
+#include "Exception.h"
+#include"Erro.h"
 #include "Plano.h"
 
 
@@ -19,28 +20,28 @@
 
      public:
 
-     //construtores
+     //construtores/destrutores
 
-     posPago(string n,double p,double pd, double vel, Data &v): nome(n),preco(p),pacoteDeDados(pd),veloInternet(vel),vencimento(v) {}
-     posPago(const posPago &b):nome(b.nome),preco(b.preco),pacoteDeDados(b.pacoteDeDados),veloInternet(b.veloInternet),vencimento(b.vencimento) {}
-
+     posPago(string n,double p,double pd, double vel, Data &v);
+     posPago(const posPago &b);
+     ~posPago();
      //getters
-      string getNome(){return nome;}
-      double getVelocidade() {return veloInternet;}
-      int getDiaVencimento () {return vencimento.getDia();}
-      int getMesVencimento() {return vencimento.getMes();}
+      string getNome();
+      double getVelocidade() ;
+      int getDiaVencimento () ;
+      int getMesVencimento() ;
 
 
       //funções de funcionalidade
 
-       bool isPrepago () {return false;}
-       double getFran() {return pacoteDeDados;}
-       double custoDeChamada() {return preco;}
+       bool isPrepago () ;
+       double getFran() ;
+       double custoDeChamada() ;
        bool foraDaValidade(Data& now );
        void quitarInternet (double valor,Data& now);
        void pagar(double cash) ;
 
-      ~posPago(){}
+
 
 
  };
@@ -48,60 +49,9 @@
  double posPago::reduz=0.5;
 
 
-  bool posPago:: foraDaValidade(Data& now) {
-    if(now.getAno()>vencimento.getAno())
-       return true;
-    else if (now.getAno()<vencimento.getAno())
-       return false;
-    else {
-      if(now.getMes()>vencimento.getMes())
-          return true;
-    else if (now.getMes()<vencimento.getMes())
-         return false;
-    else {
-        if(now.getDia()>vencimento.getDia())
-            return true;
-        else
-            return false;
-        }
-      }
-
-  }
-
- void posPago::quitarInternet (double valor,Data& now){
-
-     if(this->foraDaValidade(now)) {
-         throw(Exception("Pendencia de pagamento"));
-
-     } else {
-
-         if(valor<pacoteDeDados)
-             pacoteDeDados-=valor;
-         else {
-            pacoteDeDados=0;
-            veloInternet=veloInternet*reduz;
-            throw(Exception("Pacote de dados todos consumidos, internet com velocidade reduzida"));
-         }
-
-     }
-
-
- }
-
-
- void posPago::pagar( double cash) {
-
-        if(cash<this->preco)
-            throw(Erro("Valor insuficiente!"));
-        else {
-            vencimento.setDia(30);
-
-        }
 
 
 
-
- }
 
 
 #endif // POSPAGO_H

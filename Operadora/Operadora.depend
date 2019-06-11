@@ -2,11 +2,27 @@
 1514140574 source:c:\users\55319\desktop\tp-2-poo\operadora\main.cpp
 	<iostream>
 
-1560292282 source:c:\users\55319\desktop\tp-2-poo\cpp\data.cpp
+1560292929 source:c:\users\55319\desktop\tp-2-poo\cpp\data.cpp
 	"../Header/Data.h"
 
-1560274278 c:\users\55319\desktop\tp-2-poo\header\data.h
+1560292929 c:\users\55319\desktop\tp-2-poo\header\data.h
 	<ctime>
 	<cmath>
 	<iostream>
+
+1560294096 source:c:\users\55319\desktop\tp-2-poo\cpp\prepago.cpp
+	"../Header/prePago.h"
+
+1560294096 c:\users\55319\desktop\tp-2-poo\header\prepago.h
+	"Data.h"
+	"Plano.h"
+	"Erro.h"
+
+1560292928 c:\users\55319\desktop\tp-2-poo\header\plano.h
+	<string>
+	"Data.h"
+
+1560292928 c:\users\55319\desktop\tp-2-poo\header\erro.h
+	<iostream>
+	<string>
 
