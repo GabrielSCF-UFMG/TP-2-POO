@@ -26,3 +26,15 @@
 	<iostream>
 	<string>
 
+1560295036 source:c:\users\55319\desktop\tp-2-poo\cpp\pospago.cpp
+	"../Header/posPago.h"
+
+1560295068 c:\users\55319\desktop\tp-2-poo\header\pospago.h
+	"Data.h"
+	"Exception.h"
+	"Erro.h"
+	"Plano.h"
+
+1560292928 c:\users\55319\desktop\tp-2-poo\header\exception.h
+	<iostream>
+
