@@ -32,6 +32,18 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="../CPP/Data.cpp" />
+		<Unit filename="../CPP/ligacaoDados.cpp" />
+		<Unit filename="../CPP/posPago.cpp" />
+		<Unit filename="../CPP/prePago.cpp" />
+		<Unit filename="../Header/Data.h" />
+		<Unit filename="../Header/Erro.h" />
+		<Unit filename="../Header/Exception.h" />
+		<Unit filename="../Header/Ligacao.h" />
+		<Unit filename="../Header/LigacaoDados.h" />
+		<Unit filename="../Header/Plano.h" />
+		<Unit filename="../Header/posPago.h" />
+		<Unit filename="../Header/prePago.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

@@ -1,4 +1,4 @@
-ifndef LIGACAO_H
+#ifndef LIGACAO_H
 
 #define LIGACAO_H
 
@@ -14,7 +14,7 @@ class Ligacao {
     public:
       virtual Data getDia()=0;
       virtual double getCusto()=0;
-      virtual ~Ligacao ();
+      virtual ~Ligacao(){}
 
 
 
@@ -28,4 +28,4 @@ class Ligacao {
 #endif // LIGACAO_H
 
 
-#endif
+
