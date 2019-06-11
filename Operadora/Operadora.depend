@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1514140574 source:c:\users\55319\desktop\tp-2-poo\operadora\main.cpp
+	<iostream>
+
+1560292282 source:c:\users\55319\desktop\tp-2-poo\cpp\data.cpp
+	"../Header/Data.h"
+
+1560274278 c:\users\55319\desktop\tp-2-poo\header\data.h
+	<ctime>
+	<cmath>
+	<iostream>
+
