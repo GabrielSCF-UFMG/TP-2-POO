@@ -1,6 +1,9 @@
 #ifndef LIGACAOSIMPLES_H
 
 #define LIGACAOSIMPLES_H
+
+#include"Ligacao.h"
+
 class ligacaoSimples: public Ligacao {
 
   private:
@@ -8,7 +11,7 @@ class ligacaoSimples: public Ligacao {
   public:
 
       //construtores & destrutor
-      ligacaoSimples(double dc, Data dia,double dm=0,double ds=0);
+      ligacaoSimples(double c, Data dia,double dm=0,double ds=0);
       ligacaoSimples(ligacaoSimples& l);
       ~ligacaoSimples();
       //getters
