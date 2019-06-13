@@ -25,13 +25,24 @@
       }
       Celular::Celular(Celular &c) :  plano(c.plano),creditos(c.creditos), franquia(c.franquia) {
 
-        for(int i=0; i<numero;i++)
+        for(int i=0; i<numero.size();i++)
              numero[i]= c.numero[i];
 
 
 
 
       }
-      ~Celular();
+     Celular:: ~Celular(){
+
+        for(int k=0;k<ligacoes.size();k++)
+                delete ligacoes[k];
+
+
+
+
+
+
+
+      }
 
 

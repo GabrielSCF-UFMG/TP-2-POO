@@ -32,7 +32,9 @@
 
 //setters
  void prePago:: setCredito(double c, Data&deposito) {
-     credito+=c; validade.setDia(deposito.getDia()+30);
+     credito+=c;
+     validade=deposito;
+     validade.setDia(30);
  }
  void prePago::setFranquia(double quantia) {
      franquia+=quantia;

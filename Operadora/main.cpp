@@ -1,17 +1,36 @@
 #include <iostream>
-#include"../Header/Data.h"
+#include<vector>
+#include<algorithm>
+#include<time.h>
+#include<stdlib.h>
 
 using namespace std;
 
 int main()
 {
-    Data Atual;
 
-    Data A1= Data(1,9,5000);
-    Data A=A1;
+    vector <int> numero;
+    int i=0;
+   for(int k=0;k<15;k++) {
+     srand( (unsigned)time(NULL) );
+         for( i=0 ; i <8 ; i++)
+                  numero.push_back(rand()%10);
 
-    cout<<A.getDia() <<" / "<<A.getMes() << " / "<<A.getAno()<<endl;
 
+        unsigned semente=unsigned  (rand());
+         srand( semente);
+         int sorte=rand() %100;
+        if(sorte%2==0)
+           std::random_shuffle ( numero.begin(),numero.end() );
+         if(sorte%3==0)
+           std::random_shuffle ( numero.begin(),numero.end() );
+         if(sorte%5==0)
+           std::random_shuffle ( numero.begin(),numero.end() );
+
+         for( i=0 ; i <8 ; i++)
+               cout<<numero[i];
+         cout<<endl;
+   }
 
     return 0;
 }
