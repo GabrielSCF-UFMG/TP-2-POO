@@ -7,3 +7,30 @@
 
       ligacaoDados::~ligacaoDados(){}
 
+       //getters
+     Data ligacaoDados::getDia() {
+
+        return dia;
+
+
+      }
+
+      double ligacaoDados::getCusto() {
+         return custo;
+
+      }
+
+      double ligacaoDados::getDadosCon() {
+        return dadosConsumidos;
+      }
+
+
+      //set
+
+       void ligacaoDados::setCusto(double &c){
+
+          custo=c;
+
+
+       }
+

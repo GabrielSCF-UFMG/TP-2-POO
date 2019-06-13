@@ -13,8 +13,12 @@ class ligacaoDados: public Ligacao {
       ligacaoDados(double dc, Data dia);
       ligacaoDados(ligacaoDados& b);
       ~ligacaoDados();
+      //getters
       Data getDia();
       double getCusto();
+      double getDadosCon( );
+      //set
+      void setCusto(double &c);
 
 
 
