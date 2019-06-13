@@ -2,49 +2,49 @@
 1514140574 source:c:\users\55319\desktop\tp-2-poo\operadora\main.cpp
 	<iostream>
 
-1560292929 source:c:\users\55319\desktop\tp-2-poo\cpp\data.cpp
+1560456921 source:c:\users\55319\desktop\tp-2-poo\cpp\data.cpp
 	"../Header/Data.h"
 
-1560292929 c:\users\55319\desktop\tp-2-poo\header\data.h
+1560456921 c:\users\55319\desktop\tp-2-poo\header\data.h
 	<ctime>
 	<cmath>
 	<iostream>
 
-1560294096 source:c:\users\55319\desktop\tp-2-poo\cpp\prepago.cpp
+1560456921 source:c:\users\55319\desktop\tp-2-poo\cpp\prepago.cpp
 	"../Header/prePago.h"
 
-1560294096 c:\users\55319\desktop\tp-2-poo\header\prepago.h
+1560456921 c:\users\55319\desktop\tp-2-poo\header\prepago.h
 	"Data.h"
 	"Plano.h"
 	"Erro.h"
 
-1560292928 c:\users\55319\desktop\tp-2-poo\header\plano.h
+1560456921 c:\users\55319\desktop\tp-2-poo\header\plano.h
 	<string>
 	"Data.h"
 
-1560292928 c:\users\55319\desktop\tp-2-poo\header\erro.h
+1560456921 c:\users\55319\desktop\tp-2-poo\header\erro.h
 	<iostream>
 	<string>
 
-1560295036 source:c:\users\55319\desktop\tp-2-poo\cpp\pospago.cpp
+1560456921 source:c:\users\55319\desktop\tp-2-poo\cpp\pospago.cpp
 	"../Header/posPago.h"
 
-1560295068 c:\users\55319\desktop\tp-2-poo\header\pospago.h
+1560456921 c:\users\55319\desktop\tp-2-poo\header\pospago.h
 	"Data.h"
 	"Exception.h"
 	"Erro.h"
 	"Plano.h"
 
-1560292928 c:\users\55319\desktop\tp-2-poo\header\exception.h
+1560456921 c:\users\55319\desktop\tp-2-poo\header\exception.h
 	<iostream>
 
-1560447513 source:c:\users\55319\desktop\tp-2-poo\cpp\ligacaodados.cpp
+1560456921 source:c:\users\55319\desktop\tp-2-poo\cpp\ligacaodados.cpp
 	"../Header/LigacaoDados.h"
 
-1560447472 c:\users\55319\desktop\tp-2-poo\header\ligacaodados.h
+1560456921 c:\users\55319\desktop\tp-2-poo\header\ligacaodados.h
 	"Ligacao.h"
 
-1560296392 c:\users\55319\desktop\tp-2-poo\header\ligacao.h
+1560456921 c:\users\55319\desktop\tp-2-poo\header\ligacao.h
 	"Data.h"
 
 1560447532 source:c:\users\55319\desktop\tp-2-poo\operadora\untitled1.c
