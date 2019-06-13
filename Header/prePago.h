@@ -36,7 +36,7 @@ class prePago: public Plano {
          void setFranquia(double quantia) ;
        //funções de funcionalidade
          void quitarCredito (double valor);
-         bool foraDaValidade(Data now );
+         bool foraDaValidade(Data& now );
          bool isPrepago() ;
          double custoDeChamada () ;
          double custoDeInternet () ;

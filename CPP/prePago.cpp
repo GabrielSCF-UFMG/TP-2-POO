@@ -52,7 +52,7 @@
      credito-=valor;
  }
 
- bool prePago::foraDaValidade(Data now ) {
+ bool prePago::foraDaValidade(Data& now ) {
 
       if(now.getAno()>validade.getAno())
            return true;

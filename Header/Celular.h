@@ -21,7 +21,7 @@ class Celular{
 
 private:
     vector<int> numero; //Começa em 0 e incrementa 1 a cada novo numero
-    Plano& plano;
+    Plano* plano;
     vector <Ligacao*> ligacoes;
     static int numeroDeAlgarismos;
     double creditos;
@@ -36,6 +36,10 @@ public:
     //getters
     vector<int> getNum();
     vector<Ligacao*> getHistorico();
+
+    //demais funcoes
+
+    void chamada(double duracao);
 
 
 

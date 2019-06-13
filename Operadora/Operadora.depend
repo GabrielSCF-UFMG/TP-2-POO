@@ -14,15 +14,15 @@
 	<cmath>
 	<iostream>
 
-1560458050 source:c:\users\55319\desktop\tp-2-poo\cpp\prepago.cpp
+1560461076 source:c:\users\55319\desktop\tp-2-poo\cpp\prepago.cpp
 	"../Header/prePago.h"
 
-1560456921 c:\users\55319\desktop\tp-2-poo\header\prepago.h
+1560461065 c:\users\55319\desktop\tp-2-poo\header\prepago.h
 	"Data.h"
 	"Plano.h"
 	"Erro.h"
 
-1560456921 c:\users\55319\desktop\tp-2-poo\header\plano.h
+1560461066 c:\users\55319\desktop\tp-2-poo\header\plano.h
 	<string>
 	"Data.h"
 
@@ -59,10 +59,10 @@
 1560456921 c:\users\55319\desktop\tp-2-poo\header\ligacaosimples.h
 	"Ligacao.h"
 
-1560459639 source:c:\users\55319\desktop\tp-2-poo\cpp\celular.cpp
+1560460967 source:c:\users\55319\desktop\tp-2-poo\cpp\celular.cpp
 	"../Header/Celular.h"
 
-1560459789 c:\users\55319\desktop\tp-2-poo\header\celular.h
+1560460732 c:\users\55319\desktop\tp-2-poo\header\celular.h
 	<iostream>
 	<vector>
 	<algorithm>

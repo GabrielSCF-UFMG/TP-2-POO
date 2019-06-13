@@ -2,8 +2,8 @@
 
 
  //construtores/destrutores
-      Celular::Celular(Plano& p, double c, double f): plano(p),creditos(c), franquia(c) {
-
+      Celular::Celular(Plano& p, double c, double f): creditos(c), franquia(c) {
+          plano=&p;
           srand( (unsigned)time(NULL) );
          for(int i=0 ; i <numeroDeAlgarismos ; i++)
                   numero.push_back(rand()%10);
@@ -37,12 +37,35 @@
         for(int k=0;k<ligacoes.size();k++)
                 delete ligacoes[k];
 
-
-
-
-
-
-
       }
+
+
+      //getters
+    vector<int> Celular::getNum(){
+      return numero;
+
+    }
+    vector<Ligacao*> Celular::getHistorico(){
+       return ligacoes;
+
+    }
+
+   void Celular::chamada(double duracao) {
+
+       Data now= Data();
+       if(plano->foraDaValidade(now ))
+           throw(Exception("Fora da validade!"));
+
+       if(plano->isPrepago()) {
+
+             double custo=plano->custoDeChamada ();
+
+
+
+       }
+
+
+
+   }
 
 
