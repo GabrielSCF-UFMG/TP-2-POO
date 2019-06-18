@@ -1,5 +1,5 @@
-#include "Interface.h"
-#include "Exception.h"
+#include "Header/Interface.h"
+#include "Header/Exception.h"
 
 bool Interface::verificaDadosNovoCliente(string CPF,string nome){
     for (int i = 0;i < cliente.size();i++){
@@ -18,7 +18,7 @@ bool Interface::verificaDadosNovoCliente(string CPF,string nome){
 
 bool Interface::verificaPlano(string pName){
     for (int i = 0;i < plano.size();i++){
-        if(plano[i].getNome() == pName){
+        if(plano[i]->getNome() == pName){
             throw Exception("Esse nome ja pertence a outro plano!");
             return false;
             break;
@@ -29,7 +29,7 @@ bool Interface::verificaPlano(string pName){
 
 bool Interface::verificaCelular(double num){
     for (int i = 0;i < celular.size();i++){
-        if(celular[i].getNumero() == num){
+        if(celular[i].getNum() == num){
             return true;
             break;
         }
