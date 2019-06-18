@@ -3,11 +3,11 @@
 
 //construtores/destrutores
 
-    posPago::posPago(string n,double p,double pd, double vel, Data &v): nome(n),preco(p),pacoteDeDados(pd),
-    veloInternet(vel),vencimento(v) {}
+    posPago::posPago(string n, double pm, double pp, double f, double vel, Data &v): nome(n),precoMin(pm), precoPacote(pp),franquia(f),
+        veloInternet(vel),vencimento(v) {}
 
-    posPago::posPago(const posPago &b):nome(b.nome),preco(b.preco),
-    pacoteDeDados(b.pacoteDeDados),veloInternet(b.veloInternet),vencimento(b.vencimento) {}
+    posPago::posPago(const posPago &b):nome(b.nome),precoMin(b.precoMin),precoPacote(b.precoPacote),
+        franquia(b.franquia),veloInternet(b.veloInternet),vencimento(b.vencimento) {}
 
     posPago::  ~posPago(){}
 
@@ -39,12 +39,12 @@
 
 
    double posPago::getFran() {
-    return pacoteDeDados;
+    return franquia;
     }
 
 
-   double posPago::custoDeChamada() {
-    return preco;
+   double posPago::getPrecoMin() {
+    return precoMin;
     }
 
 
@@ -69,17 +69,17 @@
    }
 
 
-    void posPago::quitarInternet (double valor,Data& now){
+    void posPago::debitarInternet (double valor,Data& now){
 
          if(this->foraDaValidade(now)) {
              throw(Exception("Pendencia de pagamento"));
 
          } else {
 
-             if(valor<pacoteDeDados)
-                 pacoteDeDados-=valor;
+             if(valor<franquia)
+                 franquia-=valor;
              else {
-                pacoteDeDados=0;
+                franquia=0;
                 veloInternet=veloInternet*reduz;
                 throw(Exception("Pacote de dados todos consumidos, internet com velocidade reduzida"));
              }
@@ -90,16 +90,17 @@
     }
 
 
-  void posPago::pagar( double cash) {
+  void posPago::pagar( double cash, double fatura) {
 
-        if(cash<this->preco)
+        if(cash < fatura)
             throw(Erro("Valor insuficiente!"));
         else {
             vencimento.setDia(30);
 
         }
+}
 
 
-
-
-  }
+double posPago::getPrecoPacote(){
+    return precoPacote;
+}

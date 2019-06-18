@@ -29,6 +29,15 @@
      return nome;
 }
 
+  double prePago::getVelocidade(){
+    return veloInternet;
+  }
+
+  double prePago::getPrecoMin () {
+     return precoMin ;
+}
+
+
 
 //setters
  void prePago:: setCredito(double c, Data&deposito) {
@@ -38,12 +47,15 @@
  }
  void prePago::setFranquia(double quantia) {
      franquia+=quantia;
+     double valor = quantia * precoMb;
+     debitarCredito(valor);
 }
 
 
 
  //funções de funcionalidade
- void prePago:: quitarCredito (double valor) {
+
+ void prePago:: debitarCredito (double valor) {
 
      if(credito<valor)
         throw(Erro("Saldo Insuficiente!"));
@@ -52,38 +64,62 @@
      credito-=valor;
  }
 
- bool prePago::foraDaValidade(Data& now ) {
 
-      if(now.getAno()>validade.getAno())
-           return true;
-      else if (now.getAno()<validade.getAno())
-           return false;
-      else {
-          if(now.getMes()>validade.getMes())
-              return true;
-          else if (now.getMes()<validade.getMes())
-             return false;
-          else {
-            if(now.getDia()>validade.getDia())
+void prePago::debitarInternet (double valor,Data& now){
+
+         if(this->foraDaValidade(now)) {
+             throw(Exception("Creditos expirados"));
+
+         } else {
+
+             if(valor<franquia)
+                 franquia-=valor;
+             else {
+                franquia=0;
+                veloInternet = veloInternet*reduz;
+                throw(Exception("Pacote de dados todos consumidos, internet com velocidade reduzida"));
+             }
+
+         }
+
+
+    }
+
+
+     bool prePago::foraDaValidade(Data& now ) {
+
+            if(now.getAno()>validade.getAno())
                 return true;
-            else
+            else if (now.getAno()<validade.getAno())
                 return false;
-           }
-      }
+            else {
+                if(now.getMes()>validade.getMes())
+                    return true;
+                else if (now.getMes()<validade.getMes())
+                    return false;
+                else {
+                    if(now.getDia()>validade.getDia())
+                        return true;
+                    else
+                        return false;
+               }
+          }
 
+     }
+
+
+    bool prePago::isPrepago() {
+        return true;
+}
+
+
+
+    double prePago::custoDeInternet () {
+        return precoMb;
+}
+
+    void prePago::contabilizar(double valor){
+        this->debitarCredito(valor);
  }
-
-
- bool prePago::isPrepago() {
-     return true;
-}
-
- double prePago::custoDeChamada () {
-     return precoMin ;
-}
-
- double prePago::custoDeInternet () {
-     return precoMb;
-}
 
 

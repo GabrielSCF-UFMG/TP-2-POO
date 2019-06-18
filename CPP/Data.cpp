@@ -86,7 +86,3 @@ const int Data::difMinutos(const Data&d) {
 
 
  }
-
-
-
-
