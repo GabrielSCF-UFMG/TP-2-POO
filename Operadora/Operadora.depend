@@ -75,3 +75,78 @@
 	"prePago.h"
 	"posPago.h"
 
+1560812470 source:d:\usuários\danilo\Área de trabalho\3º período\poo\tp_2\tp-2-poo\cpp\celular.cpp
+	"../Header/Celular.h"
+
+1560812235 d:\usuários\danilo\Área de trabalho\3º período\poo\tp_2\tp-2-poo\header\celular.h
+	<iostream>
+	<vector>
+	<algorithm>
+	<time.h>
+	<stdlib.h>
+	"Ligacao.h"
+	"LigacaoSimples.h"
+	"LigacaoDados.h"
+	"Plano.h"
+	"prePago.h"
+	"posPago.h"
+
+1560816171 d:\usuários\danilo\Área de trabalho\3º período\poo\tp_2\tp-2-poo\header\ligacao.h
+	"Data.h"
+
+1560816516 d:\usuários\danilo\Área de trabalho\3º período\poo\tp_2\tp-2-poo\header\data.h
+	<ctime>
+	<cmath>
+	<iostream>
+
+1560812235 d:\usuários\danilo\Área de trabalho\3º período\poo\tp_2\tp-2-poo\header\ligacaosimples.h
+	"Ligacao.h"
+
+1560812235 d:\usuários\danilo\Área de trabalho\3º período\poo\tp_2\tp-2-poo\header\ligacaodados.h
+	"Ligacao.h"
+
+1560816598 d:\usuários\danilo\Área de trabalho\3º período\poo\tp_2\tp-2-poo\header\plano.h
+	<string>
+	"Data.h"
+
+1560816598 d:\usuários\danilo\Área de trabalho\3º período\poo\tp_2\tp-2-poo\header\prepago.h
+	"Data.h"
+	"Plano.h"
+	"Erro.h"
+	"Exception.h"
+
+1560736304 d:\usuários\danilo\Área de trabalho\3º período\poo\tp_2\tp-2-poo\header\erro.h
+	<iostream>
+	<string>
+
+1560816598 d:\usuários\danilo\Área de trabalho\3º período\poo\tp_2\tp-2-poo\header\pospago.h
+	"Data.h"
+	"Exception.h"
+	"Erro.h"
+	"Plano.h"
+
+1560736304 d:\usuários\danilo\Área de trabalho\3º período\poo\tp_2\tp-2-poo\header\exception.h
+	<iostream>
+
+1560816299 source:d:\usuários\danilo\Área de trabalho\3º período\poo\tp_2\tp-2-poo\cpp\data.cpp
+	"../Header/Data.h"
+
+1560812073 source:d:\usuários\danilo\Área de trabalho\3º período\poo\tp_2\tp-2-poo\cpp\ligacaodados.cpp
+	"../Header/LigacaoDados.h"
+
+1560812087 source:d:\usuários\danilo\Área de trabalho\3º período\poo\tp_2\tp-2-poo\cpp\ligacaosimples.cpp
+	"../Header/LigacaoSimples.h"
+
+1560815145 source:d:\usuários\danilo\Área de trabalho\3º período\poo\tp_2\tp-2-poo\cpp\pospago.cpp
+	"../Header/posPago.h"
+
+1560816120 source:d:\usuários\danilo\Área de trabalho\3º período\poo\tp_2\tp-2-poo\cpp\prepago.cpp
+	"../Header/prePago.h"
+
+1560736304 source:d:\usuários\danilo\Área de trabalho\3º período\poo\tp_2\tp-2-poo\operadora\main.cpp
+	<iostream>
+	<vector>
+	<algorithm>
+	<time.h>
+	<stdlib.h>
+

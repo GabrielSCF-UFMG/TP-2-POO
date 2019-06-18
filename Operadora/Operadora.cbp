@@ -45,6 +45,7 @@
 		<Unit filename="../Header/Ligacao.h" />
 		<Unit filename="../Header/LigacaoDados.h" />
 		<Unit filename="../Header/LigacaoSimples.h" />
+		<Unit filename="../Header/Operadora.h" />
 		<Unit filename="../Header/Plano.h" />
 		<Unit filename="../Header/posPago.h" />
 		<Unit filename="../Header/prePago.h" />
