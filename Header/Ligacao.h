@@ -1,8 +1,7 @@
 #ifndef LIGACAO_H
-
 #define LIGACAO_H
 
-#include"Data.h"
+#include "Data.h"
 
 class Ligacao {
 
@@ -12,13 +11,9 @@ class Ligacao {
         double custo;
 
     public:
-      virtual Data getDia()=0;
-      virtual double getCusto()=0;
-      virtual ~Ligacao(){}
-
-
-
-
+		virtual Data getDia()=0;
+		virtual double getCusto()=0;
+		virtual ~Ligacao(){}
 };
 
 

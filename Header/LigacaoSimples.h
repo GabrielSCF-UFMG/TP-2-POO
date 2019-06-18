@@ -1,27 +1,29 @@
 #ifndef LIGACAOSIMPLES_H
-
 #define LIGACAOSIMPLES_H
 
 #include"Ligacao.h"
 
 class ligacaoSimples: public Ligacao {
 
-  private:
-     double duracaoMIN, duracaoSEG;
-  public:
+    private:
+        double duracao;
+        double NumTelefone;
+    public:
 
-      //construtores & destrutor
-      ligacaoSimples(double c, Data dia,double dm=0,double ds=0);
-      ligacaoSimples(ligacaoSimples& l);
-      ~ligacaoSimples();
-      //getters
-      Data getDia();
-      double getCusto();
-      double getDuracaoSeg( );
-      double getDuracaoMin( );
-      //set
-      void setDuracaoSeg(double &s);
-      void setDuracaoMin(double &m);
+        //construtores & destrutor
+        ligacaoSimples(double precoMin, Data dia, double dur, double num);
+        ligacaoSimples(ligacaoSimples& l);
+        ~ligacaoSimples();
+
+        //getters
+        Data getDia();
+        double getCusto();
+        double getDuracao();
+        //double getDuracaoMin( );
+
+        //setters
+        void setDuracao(double &dur);
+        //void setDuracaoMin(double &m);
 
 
 

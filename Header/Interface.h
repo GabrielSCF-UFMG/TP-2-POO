@@ -12,24 +12,24 @@ class Interface{
 private:
 
     vector <Cliente>cliente;
-    vector <Plano> plano;
+    vector <Plano*> plano;
     vector <Celular> celular;
-    vector <Date> dataLig;
+    vector <Data> dataLig;
     static int num;
 
 public:
 
     Interface(){};
 
-    vector <Plano>   &getPlano  (){return plano  ;};
+    vector <Plano*>   &getPlano  (){return plano  ;};
     vector <Cliente> &getCliente(){return cliente;};
     vector <Celular> &getCelular(){return celular;};
 
     bool verificaDadosNovoCliente(string CPF,string nome);
     bool verificaPlano(string pName);
     bool verificaCelular(double num);
-    bool verificaDataLig(int i,Date &d);
-    bool testaValidade(int i,Date &d);
+    bool verificaDataLig(int i,Data &d);
+    bool testaValidade(int i,Data &d);
     bool testaFranquia(int i);
 
 
@@ -45,8 +45,8 @@ public:
     void listarPlanos();
     void listarClientes();
     void listarCelulares();
-    void listarLigacoesSimples(int i,LigacaoSimples &ls);
-    void listarLigacoesDados(int i,LigacaoDados &ld);
+    void listarLigacoesSimples(int i,ligacaoSimples &ls);
+    void listarLigacoesDados(int i,ligacaoDados &ld);
     void listarValorDaConta();
     void listarCreditosData();
 
@@ -54,8 +54,8 @@ public:
     void interfaceCelular(Celular &c);
     void interfaceCliente(Cliente &c);
     void interfaceLigacao(Ligacao &l);
-    void interfaceLigSimples(LigacaoSimples &ls);
-    void interfaceLigDados(LigacaoDados &ld);
+    void interfaceLigSimples(ligacaoSimples &ls);
+    void interfaceLigDados(ligacaoDados &ld);
 
     void dadosPacoteInternet();
     void extratoSimples();
@@ -70,7 +70,7 @@ public:
             cliente[i].~Cliente();
         }
         for(int i = 0;i < plano.size();i++){
-            plano[i].~Plano();
+            plano[i]->~Plano();
         }
         for(int i = 0;i < celular.size();i++){
             celular[i].~Celular();

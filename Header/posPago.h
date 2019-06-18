@@ -4,52 +4,47 @@
 
 #include "Data.h"
 #include "Exception.h"
-#include"Erro.h"
+#include "Erro.h"
 #include "Plano.h"
 
 
- class posPago: public Plano {
+class posPago: public Plano {
 
-    private:
-        string nome;
-        double preco;
-        double pacoteDeDados;//mb
-        double veloInternet;//mb/s
-        Data vencimento;
-        static double reduz;
+private:
+    string nome;
+    double precoMin;
+    double veloInternet;//mb/s
+    double franquia;//mb
+    double reduz=0.5;
 
-     public:
+    double precoPacote;
+    Data vencimento;
 
-     //construtores/destrutores
+public:
 
-     posPago(string n,double p,double pd, double vel, Data &v);
-     posPago(const posPago &b);
-     ~posPago();
-     //getters
-      string getNome();
-      double getVelocidade() ;
-      int getDiaVencimento () ;
-      int getMesVencimento() ;
+    //construtores/destrutores
+    posPago(string n,double pm,double pp,double pd, double vel, Data &v);
+    posPago(const posPago &b);
+    ~posPago();
 
-
-      //funções de funcionalidade
-
-       bool isPrepago () ;
-       double getFran() ;
-       double custoDeChamada() ;
-       bool foraDaValidade(Data& now );
-       void quitarInternet (double valor,Data& now);
-       void pagar(double cash) ;
+    //getters
+    string getNome();
+    double getFran() ;
+    double getVelocidade() ;
+    int getDiaVencimento () ;
+    int getMesVencimento() ;
+    double getPrecoMin() ;
+    double getPrecoPacote() ;
 
 
+    //funções de funcionalidade
+    bool isPrepago () ;
+    bool foraDaValidade(Data& now );
+    void debitarInternet (double valor,Data& now);
+    void pagar(double cash,double fatura) ;
+    void contabilizar(double valor){};
 
-
- };
-
- double posPago::reduz=0.5;
-
-
-
+};
 
 
 

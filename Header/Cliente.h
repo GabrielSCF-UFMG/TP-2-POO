@@ -47,16 +47,16 @@ public:
         celulares.push_back(c);
         }
 
-     void newLigacaoSimples(int i, Date &d,double dur,double num){ //Celualr a ligar
-        celulares[i].newLigacaoSimples(d,dur,num);
+     void newLigacaoSimples(int i, Data &d,double dur,double num){ //Celular a ligar
+        celulares[i].newLigacaoS(d,dur,num);
+        //celulares[i].ligacoes.push_back(ligacaoSimples(d,dur,num));
+        //celulares[i].newLigacaoSimples(d,dur,num);
      }
 
-     void newLigacaoDadosDownload(int i,Date &d,double dur,double down){
-        celulares[i].newLigacaoDadosDownload(d,dur,down);
-     }
-
-     void newLigacaoDadosUpload(int i,Date &d,double dur,double up){
-        celulares[i].newLigacaoDadosUpload(d,dur,up);
+     void newLigacaoDados(int i, Data &d, double dur, TipoDados tipo){
+        celulares[i].newLigacaoD(d,dur,tipo);
+        //celulares[i].ligacoes.push_back(ligacaoDados(d,dur,down));
+        //celulares[i].newLigacaoDadosDownload(d,dur,down);
      }
 
      ~Cliente(){

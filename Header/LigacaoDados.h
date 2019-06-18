@@ -3,22 +3,28 @@
 
 #include "Ligacao.h"
 
+enum TipoDados{down,up};
+
 class ligacaoDados: public Ligacao {
 
-  private:
-     double dadosConsumidos;
-  public:
+    private:
+        double dadosConsumidos;
+        TipoDados tipo;
 
-      //construtores & destrutor
-      ligacaoDados(double dc, Data dia);
-      ligacaoDados(ligacaoDados& b);
-      ~ligacaoDados();
-      //getters
-      Data getDia();
-      double getCusto();
-      double getDadosCon( );
-      //set
-      void setCusto(double &c);
+    public:
+        //construtores & destrutor
+        ligacaoDados(double dc, Data dia,double dur, TipoDados tipo);
+        ligacaoDados(const ligacaoDados &b);
+        ~ligacaoDados();
+
+        //getters
+        Data getDia();
+        double getCusto();
+        double getDadosCon();
+
+        //set
+
+        //void setCusto(double &c);
 
 
 

@@ -24,12 +24,10 @@ private:
     Plano* plano;
     vector <Ligacao*> ligacoes;
     static int numeroDeAlgarismos;
-    double creditos;
-    double franquia;
 
 public:
      //construtores/destrutores
-    Celular(Plano& p, double c, double f);
+    Celular(Plano& p);
     Celular(Celular &c);
     ~Celular();
 
@@ -38,8 +36,10 @@ public:
     vector<Ligacao*> getHistorico();
 
     //demais funcoes
-
+    void newLigacaoS(Data &d,double dur, double num);
+    void newLigacaoD(Data &d,double dur, TipoDados tipo);
     void chamada(double duracao);
+    double fatura();
 
 
 

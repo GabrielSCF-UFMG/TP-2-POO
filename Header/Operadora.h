@@ -1,3 +1,4 @@
+
 #ifndef OPERADORA_H
 #define OPERADORA_H
 
