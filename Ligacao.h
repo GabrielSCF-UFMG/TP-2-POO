@@ -10,6 +10,12 @@
 #include "LigacaoSimples.h"
 #include "LigacaoDados.h"
 
+
+class Date;
+class LigacaoSimples;
+class LigacaoDados;
+class Plano;
+
 using namespace std;
 
 class Ligacao{

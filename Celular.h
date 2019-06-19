@@ -5,14 +5,16 @@
 #include<iostream>
 #include<vector>
 #include "Ligacao.h"
-//#include "Cliente.h"
+#include "Cliente.h"
+
+
 
 using namespace std;
 
 class Celular{
 
 private:
-    double numero; //Começa em 0 e incrementa 1 a cada novo numero
+    double numero;
     Plano plano;
     vector <Ligacao> ligacoes;
     int static proxNum;
@@ -22,7 +24,7 @@ public:
     Celular(Plano &p){
         numero = proxNum;
         plano = p;
-        proxNum += proxNum + 2;
+        proxNum += pow(proxNum%99,2);
     };
 
     Celular(const Celular &c){
@@ -46,21 +48,29 @@ public:
         plano.setPlano(pN,vMin,vel,fran,vAlem);
     }
 
+    void setProxNum(int num){
+        numero = num;
+    }
+
                             //d = Dia e hora
     void newLigacaoSimples(Date &d,double dur,double num){//Duracao em minutos, i  indica qual celualr deseja fazer a ligacao
+        Date dd;
+        double durr = 0;Plano p;
+        Ligacao def(dd,durr,p);
+        ligacoes.push_back(def);
         cout<<"\nDiscando no celular..."<<endl;
-        ligacoes[ligacoes.size()].newLigacaoSimples(d,dur,plano,num);
+        ligacoes[ligacoes.size()-1].newLigacaoSimples(d,dur,plano,num);
         //ligacoes.newLigacaoSimples(d,dur,cDest.plano,cDest.numero);
     }
 
     void newLigacaoDadosDownload(Date &dataLigacao,double dur,double down){
         cout<<"Realizando a ligacao de download..."<<endl;
-        ligacoes[ligacoes.size()].newLigacaoDadosDownload(dataLigacao,dur,plano,down);
+        ligacoes[ligacoes.size()-1].newLigacaoDadosDownload(dataLigacao,dur,plano,down);
     }
 
     void newLigacaoDadosUpload(Date &dataLigacao,double dur,double up){
          cout<<"Realizando a ligacao de upload..."<<endl;
-        ligacoes[ligacoes.size()].newLigacaoDadosUpload(dataLigacao,dur,plano,up);
+        ligacoes[ligacoes.size()-1].newLigacaoDadosUpload(dataLigacao,dur,plano,up);
     }
 
     void IncluirLigacao(const Ligacao &l){
@@ -69,13 +79,13 @@ public:
 
     void acrecentarCreditos(double nCreditos){
         if(plano.getTipo() == true){
-            this->plano.getPre().setCredito(nCreditos);//Acrescenta 'nCreditos' ao celular;
+            this->plano.setCredito(nCreditos);//Acrescenta 'nCreditos' ao celular;
         }
         double gasto = 0;
         for (int i = 0;i <ligacoes.size();i++){
             gasto += ligacoes[i].gastosLig();
         }
-            cout<<"Creditos disponiveis:"<<plano.getPre().restanteCreditos(gasto)<<endl;
+            cout<<"Creditos disponiveis:"<<plano.getCred()<<endl;
     }
 
     ~Celular(){
@@ -84,11 +94,11 @@ public:
         for(int i = 0;i< ligacoes.size();i++){
             ligacoes[i].~Ligacao();
         }
-        proxNum = 10;
+        proxNum = 987654;
     }
 
 };
 //vector <double> Celular::numerosCelular;
-int Celular::proxNum = 10;
+int Celular::proxNum = 987654;
 #endif
 

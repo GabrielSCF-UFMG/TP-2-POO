@@ -7,6 +7,8 @@
 
 using namespace std;
 
+class Date;
+
 class LigacaoDados{
 
 private:

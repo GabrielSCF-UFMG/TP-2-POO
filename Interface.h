@@ -4,6 +4,11 @@
 #include "Cliente.h"
 #include "Erro.h"
 
+class Cliente;
+class Plano;
+class Celular;
+class Date;
+
 using namespace std;
 
 
@@ -29,11 +34,14 @@ public:
     bool verificaPlano(string pName);
     bool verificaCelular(double num);
     bool verificaDataLig(int i,Date &d);
+    bool verificaIndexPlano(int i);
+    bool verificaIndexCliente(int i);
     bool testaValidade(int i,Date &d);
     bool testaFranquia(int i);
 
-
+    int clienteNum(int num);
     int retornaCelular(double num);
+    int numeroLigacoes(Celular &c);
 
     void addCreditos();
     void regLigacao();
@@ -45,6 +53,7 @@ public:
     void listarPlanos();
     void listarClientes();
     void listarCelulares();
+    void listarNumeroCelulares();
     void listarLigacoesSimples(int i,LigacaoSimples &ls);
     void listarLigacoesDados(int i,LigacaoDados &ld);
     void listarValorDaConta();

@@ -8,7 +8,7 @@ bool Interface::verificaDadosNovoCliente(string CPF,string nome){
             return false;
         }
         if(cliente[i].getNome() == nome){
-            throw Exception("Existe um cliente cadastrado nesse nome!");
+            throw Exception("Existe um cliente cadastrada nesse nome!");
             return false;
         }
     }
@@ -27,6 +27,28 @@ bool Interface::verificaPlano(string pName){
         return true;
 }
 
+bool Interface::verificaIndexPlano(int i){
+
+    if((i >= plano.size())||(i < 0)){
+        return false;
+        throw("Index nao encontrado do vetor plano!");
+    }else{
+        return true;
+    }
+
+}
+
+bool Interface::verificaIndexCliente(int i){
+
+    if((i >= cliente.size())||(i < 0)){
+        return false;
+        throw("Index nao encontrado do vetor cliente!");
+    }else{
+        return true;
+    }
+
+}
+
 bool Interface::verificaCelular(double num){
     for (int i = 0;i < celular.size();i++){
         if(celular[i].getNumero() == num){
@@ -37,6 +59,8 @@ bool Interface::verificaCelular(double num){
         throw Exception("Esse numero de celular nao existe!");
         return false;
 }
+
+
 
 int Interface::retornaCelular(double num){
     for (int i = 0;i < celular.size();i++){
@@ -49,7 +73,7 @@ int Interface::retornaCelular(double num){
 }
 
 void Interface::cadastrarCliente(){
-    cout<<"--CADASTRANDO CLIENTE--"<<endl;
+    cout<<"\n\t--CADASTRANDO NOVO CLIENTE--"<<endl;
     string CPF;string nome;string endereco;
     cout<<"Digite o CPF do novo cliente:";
     cin>>CPF;
@@ -59,15 +83,15 @@ void Interface::cadastrarCliente(){
     cin>>endereco;
     if(verificaDadosNovoCliente(CPF,nome)){
         cliente.push_back(Cliente(CPF,nome,endereco));
-        cout<<"--Cliente cadastrado com sucesso!--"<<endl;
+        cout<<"\t--CLIENTE CADASTRADO COM SUCESSO!--"<<endl;
     }else{
-        cout<<"--Cliente nao pode ser cadastrado!--"<<endl;
+        throw("\t--CLIENTE NAO PODE SER CADASTRADO!--");
     }
 
 }
 
 void Interface::cadastrarPlano(){
-    cout<<"--CADASTRANDO PLANO--"<<endl;
+    cout<<"\n\t--CADASTRANDO NOVO PLANO--"<<endl;
     string pName;double vMin;double vel;double fran;double vAlem;int tipo;bool preOrPos;
     cout<<"Digite o nome do plano:";
     cin>>pName;
@@ -100,9 +124,9 @@ void Interface::cadastrarPlano(){
 
     if(verificaPlano(pName)){
         plano.push_back(Plano(pName,vMin,vel,fran,vAlem,preOrPos,d));
-        cout<<"--Plano cadastrado com sucesso!--"<<endl;
+        cout<<"\t--PLANO CADASTRADO COM SUCESSO!--"<<endl;
     }else{
-        cout<<"--Plano nao pode ser cadastrado!--"<<endl;
+        throw("\t--PLANO NAO PODE SER CADASTRADO!--");
     }
 
 }
@@ -110,31 +134,33 @@ void Interface::cadastrarPlano(){
 void Interface::cadastrarCelular(){
     int nPlano,nCliente;
 
+    cout<<"\n\t--CADASTRANDO NOVO CELULAR--\n";
     cout<<"Escolha o plano do celular pelo seu numero:"<<endl;
     listarPlanos();
-    cout<<"Numero do plano:";cin>>nPlano;
+    cout<<"\nNumero do plano escolhido:";cin>>nPlano;
 
-    if(!plano[nPlano].getTipo()){
-        int dia,mes;
-        cout<<"\nDigite a data de vencimento do plano assinatura:";
-        cout<<"\nDia:";cin>>dia;
-        cout<<"Mes:";cin>>mes;
-        Date val(0,dia,mes,0);
-        plano[nPlano].setVencimento(val);
-    }
+    if(verificaIndexPlano(nPlano)){
 
-    cout<<"Escolha o cliente a quem o celular sera pertencido pelo seu numero:"<<endl;
+    cout<<"Escolha o cliente que recebera o celular pelo seu numero:"<<endl;
     listarClientes();
-    cout<<"Numero do cliente:";cin>>nCliente;
+    cout<<"\nNumero do cliente escolhido:";cin>>nCliente;
+        if(verificaIndexCliente(nCliente)){
+            Celular novoCelular(plano[nPlano]);
 
-    celular.push_back(Celular(plano[nPlano]));//Cria o novo celular com o plano escolhido
-    cout<<"Celular criado com sucesso!";
+            celular.push_back(novoCelular);//Cria o novo celular com o plano escolhido
+            cout<<"Celular criado com sucesso!\n";
+            cliente[nCliente].getNewCellPhone(novoCelular);//Atribui ao cliente escolhido o novo celular
 
-    //Celular c = celular[celular.size()-1];
-    cliente[nCliente].getNewCellPhone(celular[celular.size()-1]);//Atribui ao cliente escolhido o novo celular
-    //this->cliente[nCliente].celulares.push_back(c);
-    cout<<"Cliente "<<cliente[nCliente].getNome()<<" acaba de ganhar um novo celular de numero "<<celular[celular.size()-1].getNumero()<<"!"<<endl;
+            if(celular.size() > 1){
+                int Nnum = celular[celular.size()-2].getNumero();
+                celular[celular.size()-1].setProxNum(Nnum + pow(Nnum%99,2));
+                cliente[nCliente].getCelular((cliente[nCliente].getCelulares().size())-1).setProxNum(Nnum + pow(Nnum%99,2));
+            }
 
+            cout<<"\nCliente "<<cliente[nCliente].getNome()<<" acaba de ganhar um novo celular!"<<endl;
+            //cujo numero eh "<<celular[celular.size()-1].getNumero()<<"!"<<endl;
+        }
+    }
 }
 
 void Interface::interfacePlano(Plano &p){
@@ -149,19 +175,22 @@ void Interface::interfacePlano(Plano &p){
     cout<<"Franquia: "<<p.getFran()<<"Mb!" <<endl;
     cout<<"Velocidade alem da Franquia: "<<p.getVelAlem()<<"Kbps!"<<endl;
     }
-    cout<<endl;
 
 }
 
 void Interface::interfaceCliente(Cliente &c){
 
-    cout<<"\nCPF do cliente:"<<c.getCPF() <<endl;
+    cout<<"CPF do cliente:"<<c.getCPF() <<endl;
     cout<<"Nome do cliente:"<<c.getNome() <<endl;
     cout<<"Endereco do cliente:"<<c.getEndereco() <<endl;
     if(c.getCelulares().size() == 0){
         cout<<"Esse cliente nao tem um celular!"<<endl;
     }else{
         cout<<"Numero de celulares do cliente:"<<c.getCelulares().size()<<endl;
+        for(int i = 0;i < c.getCelulares().size();i++){
+            cout<<"Celular "<<i<<":\n";
+            interfaceCelular(c.getCelulares()[i]);
+        }
     }
 
 }
@@ -170,33 +199,62 @@ void Interface::interfaceCelular(Celular &c){
 
     cout<<"Numero do celular:"<<c.getNumero()<<endl;
     interfacePlano(c.getPlano());
-    if(c.getLigacoes().size() == 0){
-        cout<<"---O celular nao tem nenhum ligacao---"<<endl;
+    if(numeroLigacoes(c) == 0){
+        cout<<"Esse celular nao realizou nenhuma ligacao"<<endl;
     }else{
-        cout<<"O celular tem "<<c.getLigacoes().size()<<"ligacoes"<<endl;
+        cout<<"O celular tem "<<numeroLigacoes(c)<<"ligacoes"<<endl;
+        for(int i = 0;i < numeroLigacoes(c);i++){
+            interfaceLigacao(c.getLigacoes()[i]);
+        }
     }
 
 }
 
+int Interface::numeroLigacoes(Celular &c){
+    int n = 0;
+    for(int i = 0;i < c.getLigacoes().size();i++){
+        n += c.getLigacoes()[i].getNumLigacoes();
+    }
+    return n;
+}
+
 void Interface::listarPlanos(){
+
+    cout<<"\n\t--LISTANDO PLANOS--";
     for (int i = 0;i < plano.size();i++){
-        cout<<"Plano numero "<<i<<":"<<endl;
+        cout<<"\nPlano numero "<<i<<":"<<endl;
         interfacePlano(plano[i]);
     }
 }
 
 void Interface::listarClientes(){
+
+    cout<<"\n\t--LISTANDO CLIENTES--";
     for (int i = 0;i < cliente.size();i++){
-        cout<<"Cliente numero "<<i<<":"<<endl;
+        cout<<"\nCliente numero "<<i<<":"<<endl;
         interfaceCliente(cliente[i]);
     }
 
 }
 
 void Interface::listarCelulares(){
+
+    cout<<"\n\t--LISTANDO CELULARES--\n";
     for (int i = 0;i < celular.size();i++){
         cout<<"Celular numero "<<i<<":"<<endl;
         interfaceCelular(celular[i]);
+    }
+
+}
+
+void Interface::listarNumeroCelulares(){
+
+    cout<<"\n\t--LISTANDO OS NUMEROS DOS CELULARES E SEUS RESPECTIVOS DONOS--"<<endl;
+    for(int i = 0;i < cliente.size();i++){
+        for(int j = 0;j < cliente[i].getCelulares().size();j++){
+            cout<<"\nNumero de celular: "<<cliente[i].getCelulares()[j].getNumero()<<endl;
+            cout<<"Nome do cliente: "<<cliente[i].getNome()<<endl;
+        }
     }
 
 }
@@ -223,7 +281,7 @@ void Interface::interfaceLigacao(Ligacao &l){
 
 void Interface::interfaceLigSimples(LigacaoSimples &ls){
 
-    cout<<"\nData(dia/hora): "<<ls.getDia()<<"/"<<ls.getHora()<<endl;
+    cout<<"\nData(dia/hora) da ligacao: "<<ls.getDia()<<"/"<<ls.getHora()<<endl;
     cout<<"Duracao: "<<ls.getDuracao()<<endl;
     cout<<"Custo: "<<ls.getCusto()<<" reais!"<<endl;
     cout<<"Numero Telefone: "<<ls.getNum()<<endl;
@@ -258,7 +316,13 @@ void Interface::addCreditos(){
         cout<<"Digite quantos creditos serao acrescentados:";
         cin>>cred;
         int i = retornaCelular(numCell);
-        celular[i].getPlano().setAddCreditos(cred);
+        celular[i].getPlano().setCredito(cred);
+    }else{
+        double fran;
+        cout<<"Digite quantos creditos na franquia serao acrescentados:";
+        cin>>fran;
+        int i = retornaCelular(numCell);
+        celular[i].getPlano().setCredito(fran);
     }
 
 }
@@ -276,41 +340,72 @@ bool Interface::verificaDataLig(int i,Date &d){
 
 }
 
+int Interface::clienteNum(int num){
+
+    for(int i = 0;i < cliente.size();i++){
+        for(int j = 0;j< cliente[i].getCelulares().size();j++){
+            if(cliente[i].getCelulares()[j].getNumero() == num){
+                return i;
+            }
+        }
+    }
+
+}
+
 void Interface::regLigacao(){//Registro de ligacoes na ordem cronologica do tempo. Todas as ligacoe sao feitas em 2019
 
     double numLigando,numRecebendo;
-
+    cout<<"\n\t--REGISTRANDO NOVA LIGACAO--\n";
+    listarNumeroCelulares();
+    bool simples;
     cout<<"Digite o numero do celular ligando:";
     cin>>numLigando;
-    if(verificaCelular(numLigando) == true){
+    if(verificaCelular(numLigando)){
         int i = retornaCelular(numLigando);
-        cout<<"Digite o numero do celular a ligar:";
-        cin>>numRecebendo;
-        if(verificaCelular(numRecebendo) == true){
-            int j = retornaCelular(numRecebendo);
-            int hora,dia,mes;
-            cout<<"Digite a data da ligacao:"<<endl;
-            cout<<"Hora:";cin>>hora;
-            cout<<"Dia:";cin>>dia;
-            cout<<"Mes:";cin>>mes;
-            Date d(hora,dia,mes,2019);
-            dataLig.push_back(d);
-            if(verificaDataLig(i,d) == true){
-                double dura;
-                cout<<"Digite a duracao da ligacao:";
-                cin>>dura;
-                bool simples;
-                cout<<"A ligacao eh simples(1) ou de dados(0)?";
-                cin>>simples;
-                if(simples == true){
-                    if(testaValidade(i,d) == true){
-                        int gasto = celular[i].getPlano().getVM() * dura;
-                        celular[i].getPlano().setDecreCreditos(gasto);
-                        celular[i].newLigacaoSimples(d,dura,numRecebendo);
-                    }else{
-                        cout<<"Nao foi possivel realizar a ligacao simples!"<<endl;
-                    }
+        cout<<"A ligacao eh simples(1) ou de dados(0)?";
+        cin>>simples;
+
+        int hora,dia,mes;
+        cout<<"Digite a data da ligacao:"<<endl;
+        cout<<"Hora:";cin>>hora;
+        cout<<"Dia:";cin>>dia;
+        cout<<"Mes:";cin>>mes;
+        Date d(hora,dia,mes,2019);
+        dataLig.push_back(d);
+
+        if(simples == true){
+        if(verificaCelular(numLigando) == true){
+            cout<<"Digite o numero do celular a ligar:";
+            cin>>numRecebendo;
+            if(verificaCelular(numRecebendo) == true){
+                int j = retornaCelular(numRecebendo);
+                if(verificaDataLig(i,d) == true){
+                    double dura;
+                    cout<<"Digite a duracao da ligacao:";
+                    cin>>dura;
+                    //bool simples;
+                    //cout<<"A ligacao eh simples(1) ou de dados(0)?";
+                    //cin>>simples;
+                if(testaValidade(i,d) == true){
+                    int gasto = celular[i].getPlano().getVM() * dura;
+                    celular[i].getPlano().setDecreCreditos(gasto);
+                    celular[i].newLigacaoSimples(d,dura,numRecebendo);
+                    int cLig = clienteNum(numLigando);
+                    int cRec = clienteNum(numRecebendo);
+                    cout<<""<<cliente[cLig].getNome()<<" ligou para "<< cliente[cRec].getNome()<<" com sucesso!";
                 }else{
+                    cout<<"Nao foi possivel realizar a ligacao simples!"<<endl;
+                }
+                }
+            }
+        }
+        }
+        else{
+                    if(verificaDataLig(i,d) == true){
+                        double dura;
+                        cout<<"Digite a duracao da ligacao:";
+                        cin>>dura;
+
                     bool tipo;
                     cout<<"Foi usado o recurso de download(1) ou upload(1)?";
                     cin>>tipo;
@@ -322,18 +417,17 @@ void Interface::regLigacao(){//Registro de ligacoes na ordem cronologica do temp
                         }else{
                             cout<<"Nao foi possivel realizar o download!"<<endl;
                         }
-                    }else{
-                        if(testaValidade(i,d) == true){
-                            int up = celular[i].getPlano().getVel()/10 * dura * 60;
-                            celular[i].getPlano().setDecreFran(up);
-                            celular[i].newLigacaoDadosUpload(d,dura,up);
                         }else{
-                            cout<<"Nao foi possivel realizar o upload!"<<endl;
+                            if(testaValidade(i,d) == true){
+                                int up = celular[i].getPlano().getVel()/10 * dura * 60;
+                                celular[i].getPlano().setDecreFran(up);
+                                celular[i].newLigacaoDadosUpload(d,dura,up);
+                            }else{
+                                cout<<"Nao foi possivel realizar o upload!"<<endl;
+                            }
                         }
                     }
-                }
             }
-        }
     }
 }
 
@@ -405,6 +499,7 @@ void Interface::listarValorDaConta(){
     double numCell;
     cout<<"Digite o numero do celular a verificar a conta:";
     cin>>numCell;
+    cout<<"\n\t--LIGACOES DO CELULAR--\n";
     if(verificaCelular(numCell) ==  true){
         int i = retornaCelular(numCell);
         if(celular[i].getPlano().getTipo() == true){
@@ -520,7 +615,7 @@ void Interface::extratoDados(){
 
 void Interface::informarVenciCred(){
     int dia,mes;
-    cout<<"Digite a data de hoje:";
+    cout<<"Digite a data de hoje:"<<endl;
     cout<<"Dia:";cin>>dia;
     cout<<"Mes:";cin>>mes;
     Date d(0,dia,mes,2019);
@@ -548,7 +643,7 @@ void Interface::informarFranquia(){
             if(cliente[i].getCelulares()[j].getPlano().getTipo() == false){
                 if(cliente[i].getCelulares()[j].getPlano().getFran() == 0){
                     cout<<"O celular de numero" <<cliente[i].getCelulares()[j].getNumero()<<" pertencente ao cliente "<<cliente[i].getNome();
-                    cout<<" esta com a framquia zerada!"<<endl;
+                    cout<<" esta com a franquia zerada!"<<endl;
                 }
             }
         }

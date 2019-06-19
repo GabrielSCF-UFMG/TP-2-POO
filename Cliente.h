@@ -3,23 +3,25 @@
 
 #include<iostream>
 #include<vector>
+#include<string>
 
 #include "Celular.h"
 #include "Erro.h"
 
-//using namespace std;
+class Celular;
+
+using namespace std;
 
 class Cliente{
 
 private:
+
     string CPF;
     string nome;
     string endereco;
     vector <Celular> celulares; //VETOR DE CELULARES DO CLIENTE
-    //int static numDeCelulares;
 
 public:
-    //vector <Celular> celulares;
 
     Cliente(string C = "123.456.789-99",string n = "Cleiton",string e = "Rua",bool h = false):CPF(C),nome(n),endereco(e){};
 
@@ -43,21 +45,8 @@ public:
     void setEndereco(string e){endereco = e;}
 
     void getNewCellPhone(Celular &c){
-        cout<<"\nObtendo um celular..."<<endl;
         celulares.push_back(c);
         }
-
-     void newLigacaoSimples(int i, Date &d,double dur,double num){ //Celualr a ligar
-        celulares[i].newLigacaoSimples(d,dur,num);
-     }
-
-     void newLigacaoDadosDownload(int i,Date &d,double dur,double down){
-        celulares[i].newLigacaoDadosDownload(d,dur,down);
-     }
-
-     void newLigacaoDadosUpload(int i,Date &d,double dur,double up){
-        celulares[i].newLigacaoDadosUpload(d,dur,up);
-     }
 
      ~Cliente(){
 
@@ -67,7 +56,6 @@ public:
         for(int i = 0;i< celulares.size();i++){
             celulares[i].~Celular();
         }
-
      }
 };
 
