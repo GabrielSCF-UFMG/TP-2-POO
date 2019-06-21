@@ -1,0 +1,47 @@
+# depslib dependency file v1.0
+1561069610 source:c:\users\55319\desktop\tp-operadora\main.cpp
+	<iostream>
+	"Celular.h"
+
+1561064686 c:\users\55319\desktop\tp-operadora\pospago.h
+	"Data.h"
+	"Exception.h"
+	"Plano.h"
+
+1561063966 c:\users\55319\desktop\tp-operadora\data.h
+	<ctime>
+	<cmath>
+	<iostream>
+
+1561064622 c:\users\55319\desktop\tp-operadora\exception.h
+	<iostream>
+
+1561064632 c:\users\55319\desktop\tp-operadora\plano.h
+	<string>
+	"Data.h"
+
+1561065920 c:\users\55319\desktop\tp-operadora\prepago.h
+	"Data.h"
+	"Plano.h"
+	"Exception.h"
+
+1561066346 c:\users\55319\desktop\tp-operadora\ligacaodados.h
+	"Ligacao.h"
+
+1561066129 c:\users\55319\desktop\tp-operadora\ligacao.h
+	"Data.h"
+
+1561066853 c:\users\55319\desktop\tp-operadora\ligacaosimples.h
+	"Ligacao.h"
+
+1561069759 c:\users\55319\desktop\tp-operadora\celular.h
+	"prePago.h"
+	"posPago.h"
+	"ligacaoDados.h"
+	"ligacaoSimples.h"
+	<vector>
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<algorithm>
+

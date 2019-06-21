@@ -22,6 +22,8 @@
  virtual double custoDeChamada()= 0;
 
  virtual  bool foraDaValidade(Data& now )=0;
+ virtual int getVal()=0;
+ virtual int getValMes()=0 ;
 
  virtual ~Plano(){}
 
@@ -38,3 +40,4 @@
 
 
 #endif
+

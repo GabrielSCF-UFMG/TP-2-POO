@@ -1,23 +1,22 @@
-#include<iostream>
+#include <iostream>
 
-#include "Cliente.h"
-#include "InterfaceMetodos.cpp"
-
-
-int main(){
-
-    Interface a;
+#include"Celular.h"
 
 
-    a.cadastrarPlano();
-    //a.cadastrarPlano();
-    a.cadastrarCliente();
-    //a.cadastrarCliente();
 
-    a.cadastrarCelular();
-    a.cadastrarCelular();
+using namespace std;
 
-	return 0;
 
+int main()
+{
+    Data A (20,05,2020);
+  Plano*p=new prePago("Oi",A,0.5,0.08,30);
+  Celular cel(p,30);
+  Celular C(p,50);
+  cel.printNumero();
+  cout<<endl;
+  C.printNumero();
+
+
+    return 0;
 }
-

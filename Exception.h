@@ -25,3 +25,4 @@ class Exception{
 
 
 #endif // EXCEPTION_H
+
