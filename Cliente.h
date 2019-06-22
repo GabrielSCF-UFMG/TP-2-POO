@@ -6,7 +6,7 @@
 #include<string>
 
 #include "Celular.h"
-#include "Erro.h"
+#include "Exception.h"
 
 class Celular;
 
@@ -23,7 +23,7 @@ private:
 
 public:
 
-    Cliente(string C = "123.456.789-99",string n = "Cleiton",string e = "Rua",bool h = false):CPF(C),nome(n),endereco(e){};
+    Cliente(string C = "123.456.789-99",string n = "Cleiton",string e = "Rua"):CPF(C),nome(n),endereco(e){};
 
     //Construtor de copia
     Cliente(const Cliente &c){
@@ -53,7 +53,7 @@ public:
         CPF = "--";
         nome = "--";
         endereco = "--";
-        for(int i = 0;i< celulares.size();i++){
+        for(unsigned int i = 0;i< celulares.size();i++){
             celulares[i].~Celular();
         }
      }

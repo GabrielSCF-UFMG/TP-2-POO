@@ -22,12 +22,11 @@ private:
     double credito;
     bool tipo;
     Date validade;
-   // vector <PrePago> pre;
-   // vector <PosPago> pos;
 
 public:
-    Plano(string planName ="Plano",double valMin = 0,double vel = 0,double fran = 0,double velAlem = 0,bool preOrPos = false,Date val = (0,0,0,0))
+    Plano(int cred = 0,string planName ="Plano",double valMin = 0,double vel = 0,double fran = 0,double velAlem = 0,bool preOrPos = false,Date val = (0,0,0,0))
        {
+        credito = cred;
         nome = planName;
         valorMinuto = valMin;
         velocidade= vel;
@@ -37,17 +36,13 @@ public:
         validade = val;
         if(tipo == true){
             nome += " PrePago";
-            cout<<"Quantos creditos (em centavos) serao incluidos no plano "<<nome<<"?";
-            cin>>credito;
-            //PrePago p(credito,val);
-            //pre.push_back(p);
         }else{
             nome += " PosPago";
-            //PosPago a(val);
-            //pos.push_back(a);
-        }
         }
 
+        }
+
+    //Gets
     virtual string getNome(){return nome;}
     double getVM(){return valorMinuto;}//centavos
     double getVel(){return velocidade;}//Mbps
@@ -55,9 +50,65 @@ public:
     double getVelAlem(){return velocAlem;}//Kbps
     double getCred(){return credito;}//centavos
     bool getTipo(){return tipo;}
-   // PrePago &getPre(){return pre[pre.size()];}
-   // PosPago &getPos(){return pos[pos.size()];}
     Date &getValidade(){return validade;}
+    int getVencimentoDia(){return validade.getDia();}
+
+
+    //Sets
+    void setPlano(string pN,double vMin,double vel,double fran,double vAlem){
+        nome = pN;
+        valorMinuto = vMin;
+        velocidade = vel;
+        franquia = fran;
+        velocAlem = vAlem;
+    }
+
+    void setTipo(bool tipo) {
+        Plano::tipo = tipo;
+    }
+
+    void setNome(const string &nome) {
+        Plano::nome = nome;
+    }
+
+    void setValorMinuto(double valorMinuto) {
+        Plano::valorMinuto = valorMinuto;
+    }
+
+    void setVelocidade(double velocidade) {
+        Plano::velocidade = velocidade;
+    }
+
+    void setFranquia(double franquia) {
+
+        Plano::franquia = franquia;
+    }
+
+    void setVelocAlem(double velocAlem) {
+        Plano::velocAlem = velocAlem;
+    }
+
+    void setCredito(double cred) {
+
+        if(tipo == true) {
+
+            credito += cred;
+        }else{
+            franquia += cred;
+        }
+        if(credito < 0){
+            credito += cred;
+            Exception("Creditos negativos!");
+        }
+        if(franquia < 0){
+            franquia += cred;
+            Exception("Creditos negativos!");
+        }
+    }
+
+    void setValidade(const Date &validade) {
+        Plano::validade = validade;
+    }
 
     bool testaValidade(Date &d){
 
@@ -69,45 +120,9 @@ public:
 
     }
 
-    void setPlano(string pN,double vMin,double vel,double fran,double vAlem){
-        nome = pN;
-        valorMinuto = vMin;
-        velocidade = vel;
-        franquia = fran;
-        velocAlem = vAlem;
+    void addMesVencimento(int mes){
+        validade.setAddMes(mes);
     }
-
-    int getVencimentoDia(){return validade.getDia();}
-
-    void setVencimento(const Date &d){
-        validade = d;
-    }
-
-    void setCredito(double cred){ //Acrescenta + cred
-        if(tipo == true ){
-        credito += cred;
-        validade.setAddMes(3);
-        }else{
-        franquia += cred;
-        validade.setAddMes(3);
-        }
-    }
-
-    void setDecreCreditos(double gasto){
-        credito -= gasto;
-        if(credito < 0){
-            throw Exception("Creditos insuficientes para realizar a ligacao simples");
-        }
-    }
-
-    void setDecreFran(double gasto){//Gasto em megabytes
-        franquia -= gasto;
-        if(franquia < 0){
-            throw Exception("Creditos insuficientes para realizar a ligacao dados");
-        }
-    }
-
-    double restanteCreditos(double gasto){return credito-gasto;}
 
     ~Plano(){
         nome = "--";
@@ -118,12 +133,7 @@ public:
         credito = 0;
         tipo = false;
         validade.~Date();
-        // for(int i = 0;i< pre.size();i++){
-        //     pre[i].~PrePago();
-        // }
-        // for(int i = 0;i< pos.size();i++){
-        //    pos[i].~PosPago();
-        // }
+
     }
 
 };

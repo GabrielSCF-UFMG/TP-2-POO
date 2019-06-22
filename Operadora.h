@@ -1,6 +1,11 @@
 #ifndef OPERADORA_H
 #define OPERADORA_H
 
+class Cliente;
+class Plano;
+class Celular;
+class Date;
+
 class Operadora{
 
 private:
@@ -23,9 +28,16 @@ public:
 
     ~Operadora(){
 
-        delete [] cliente;
-        delete [] plano;
-        delete [] celular;
+        for(unsigned int i = 0;i < cliente.size();i++){
+            cliente[i].~Cliente();
+        }
+        for(unsigned int i = 0;i < plano.size();i++){
+            plano[i].~Plano();
+        }
+        for(unsigned int i = 0;i < celular.size();i++){
+            celular[i].~Celular();
+        }
+
 
     }
 

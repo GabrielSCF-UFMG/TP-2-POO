@@ -49,7 +49,7 @@ bool Interface::verificaIndexCliente(int i){
 
 }
 
-bool Interface::verificaCelular(double num){
+bool Interface::verificaCelular(int num){
     for (int i = 0;i < celular.size();i++){
         if(celular[i].getNumero() == num){
             return true;
@@ -62,7 +62,7 @@ bool Interface::verificaCelular(double num){
 
 
 
-int Interface::retornaCelular(double num){
+int Interface::retornaCelular(int num){
     for (int i = 0;i < celular.size();i++){
         if(celular[i].getNumero() == num){
             return i;
@@ -151,14 +151,8 @@ void Interface::cadastrarCelular(){
             cout<<"Celular criado com sucesso!\n";
             cliente[nCliente].getNewCellPhone(novoCelular);//Atribui ao cliente escolhido o novo celular
 
-            if(celular.size() > 1){
-                int Nnum = celular[celular.size()-2].getNumero();
-                celular[celular.size()-1].setProxNum(Nnum + pow(Nnum%99,2));
-                cliente[nCliente].getCelular((cliente[nCliente].getCelulares().size())-1).setProxNum(Nnum + pow(Nnum%99,2));
-            }
+            cout<<"\nCliente "<<cliente[nCliente].getNome()<<" acaba de ganhar um novo celular de numero :" <<novoCelular.getNumero()<<endl;
 
-            cout<<"\nCliente "<<cliente[nCliente].getNome()<<" acaba de ganhar um novo celular!"<<endl;
-            //cujo numero eh "<<celular[celular.size()-1].getNumero()<<"!"<<endl;
         }
     }
 }
@@ -167,8 +161,8 @@ void Interface::interfacePlano(Plano &p){
 
     if(p.getTipo()){
     cout<<"\nNome do plano: "<<p.getNome()<<endl;
-    cout<<"Valor do minuto: RS 0,"<<p.getVM()<<"!"<<endl;
-    cout<<"Creditos iniciais: RS "<<p.getCred() / 100<<",00!"<<endl;
+    cout<<"Valor do minuto: "<<p.getVM()<<" centavos!"<<endl;
+    cout<<"Creditos iniciais:  "<<p.getCred()<<" centavos!"<<endl;
     }
     else if(!p.getTipo()){
     cout<<"Velocidade da internet: "<<p.getVel()<<" Mbps!"<<endl;
@@ -316,13 +310,13 @@ void Interface::addCreditos(){
         cout<<"Digite quantos creditos serao acrescentados:";
         cin>>cred;
         int i = retornaCelular(numCell);
-        celular[i].getPlano().setCredito(cred);
+        celular[i].setCredito(cred);
     }else{
         double fran;
         cout<<"Digite quantos creditos na franquia serao acrescentados:";
         cin>>fran;
         int i = retornaCelular(numCell);
-        celular[i].getPlano().setCredito(fran);
+        celular[i].setCredito(fran);
     }
 
 }
@@ -383,12 +377,11 @@ void Interface::regLigacao(){//Registro de ligacoes na ordem cronologica do temp
                     double dura;
                     cout<<"Digite a duracao da ligacao:";
                     cin>>dura;
-                    //bool simples;
-                    //cout<<"A ligacao eh simples(1) ou de dados(0)?";
-                    //cin>>simples;
                 if(testaValidade(i,d) == true){
+                    cout<<"Creditos do celular antes da ligacao: "<<celular[i].getCreditos()<<endl;
                     int gasto = celular[i].getPlano().getVM() * dura;
-                    celular[i].getPlano().setDecreCreditos(gasto);
+                    cout<<"Creditos do celular apos a ligacao: "<<celular[i].getCreditos() - gasto<<endl;
+                    celular[i].setDecreCreditos(gasto);
                     celular[i].newLigacaoSimples(d,dura,numRecebendo);
                     int cLig = clienteNum(numLigando);
                     int cRec = clienteNum(numRecebendo);
@@ -412,7 +405,7 @@ void Interface::regLigacao(){//Registro de ligacoes na ordem cronologica do temp
                     if(tipo == true){//Ligacao download
                         if(testaValidade(i,d) == true){
                             double down  = celular[i].getPlano().getVel() * dura * 60;
-                            celular[i].getPlano().setDecreFran(down);
+                            celular[i].setDecreFran(down);
                             celular[i].newLigacaoDadosDownload(d,dura,down);
                         }else{
                             cout<<"Nao foi possivel realizar o download!"<<endl;
@@ -420,7 +413,7 @@ void Interface::regLigacao(){//Registro de ligacoes na ordem cronologica do temp
                         }else{
                             if(testaValidade(i,d) == true){
                                 int up = celular[i].getPlano().getVel()/10 * dura * 60;
-                                celular[i].getPlano().setDecreFran(up);
+                                celular[i].setDecreFran(up);
                                 celular[i].newLigacaoDadosUpload(d,dura,up);
                             }else{
                                 cout<<"Nao foi possivel realizar o upload!"<<endl;

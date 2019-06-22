@@ -46,24 +46,21 @@ public:
         ligDados = c.ligDados;
     }
 
-    virtual void newLigacaoSimples(Date &dataLigacao, double dur, Plano &p, double num){
-        cout<<"Realizando a ligacao simples..."<<endl;
-        ligSim.push_back(LigacaoSimples(dataLigacao,dur,p,num));
+    virtual void newLigacaoSimples(LigacaoSimples &ls){
+        ligSim.push_back(ls);
     }
 
-    virtual void newLigacaoDadosDownload(Date &dataLigacao,double dur,Plano &p,double down){
-        cout<<"Realizando a ligacao de download..."<<endl;
-        ligDados.push_back(LigacaoDados(down,p.getVel(),dataLigacao));
+    virtual void newLigacaoDadosDownload(LigacaoDados &ldd){
+        ligDados.push_back(ldd);
     }
 
-    virtual void newLigacaoDadosUpload(Date &dataLigacao,double dur,Plano &p,int up){
-         cout<<"Realizando a ligacao de upload..."<<endl;
-        ligDados.push_back(LigacaoDados(up,p.getVel(),dataLigacao));
+    virtual void newLigacaoDadosUpload(LigacaoDados &ldu){
+        ligDados.push_back(ldu);
     }
 
     double gastosLig(){
          double gasto;
-         for(int i = 0;i<ligSim.size();i++){
+         for(unsigned int i = 0;i< ligSim.size();i++){
             gasto += ligSim[i].getCusto();
         }
         return gasto;
@@ -82,7 +79,6 @@ public:
     void setDate(Date &d){datahora = d;};
     void setDuracao(double dur){duracao = dur;};
     void setCusto(double c){custo = c;};
-    //void setLig(int i,Ligacao &l){ligacoes[i] = l;};
     void setLigsimples(int i, LigacaoSimples &ls){ligSim[i] = ls;};
     void setDados(int i, LigacaoDados ld){ligDados[i] = ld;};
 
@@ -90,10 +86,10 @@ public:
     datahora.~Date(); //Dia e hora
     duracao = 0;
     custo = 0;
-    for(int i = 0;i< ligSim.size();i++){
+    for(unsigned int i = 0;i< ligSim.size();i++){
         ligSim[i].~LigacaoSimples();
     }
-    for(int i = 0;i< ligDados.size();i++){
+    for(unsigned int i = 0;i< ligDados.size();i++){
         ligDados[i].~LigacaoDados();
     }
     plano.~Plano();

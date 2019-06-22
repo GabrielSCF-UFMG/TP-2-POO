@@ -20,7 +20,6 @@ private:
     vector <Plano> plano;
     vector <Celular> celular;
     vector <Date> dataLig;
-    static int num;
 
 public:
 
@@ -29,6 +28,10 @@ public:
     vector <Plano>   &getPlano  (){return plano  ;};
     vector <Cliente> &getCliente(){return cliente;};
     vector <Celular> &getCelular(){return celular;};
+
+    void pushPlano   (Plano &p){plano.push_back(p);};
+    void pushCliente (Cliente &c){cliente.push_back(c);};
+    void pushCelular (Celular &cell){celular.push_back(cell);}
 
     bool verificaDadosNovoCliente(string CPF,string nome);
     bool verificaPlano(string pName);
@@ -40,7 +43,7 @@ public:
     bool testaFranquia(int i);
 
     int clienteNum(int num);
-    int retornaCelular(double num);
+    int retornaCelular(int num);
     int numeroLigacoes(Celular &c);
 
     void addCreditos();
@@ -75,19 +78,18 @@ public:
 
     ~Interface(){
 
-        for(int i = 0;i < cliente.size();i++){
+        for(unsigned int i = 0;i < cliente.size();i++){
             cliente[i].~Cliente();
         }
-        for(int i = 0;i < plano.size();i++){
+        for(unsigned int i = 0;i < plano.size();i++){
             plano[i].~Plano();
         }
-        for(int i = 0;i < celular.size();i++){
+        for(unsigned int i = 0;i < celular.size();i++){
             celular[i].~Celular();
         }
     }
 
 };
-int Interface::num = 0;
 
 
 #endif // INTERFACE_H
