@@ -19,6 +19,7 @@ class ligacaoDados: public Ligacao {
       double getDadosCon( );
       //set
       void setCusto(double const &c);
+      bool isSimples();
 
 
 
@@ -66,7 +67,13 @@ class ligacaoDados: public Ligacao {
 
        }
 
+bool ligacaoDados:: isSimples() {
+  return false;
 
+
+
+
+}
 
 
 #endif // LIGACAODADOS_H

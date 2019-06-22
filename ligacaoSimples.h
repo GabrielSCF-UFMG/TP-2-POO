@@ -22,7 +22,7 @@ class ligacaoSimples: public Ligacao {
       //set
       void setDuracaoSeg(double const &s);
       void setDuracaoMin(double const &m);
-
+      bool isSimples();
 
 
 
@@ -83,7 +83,9 @@ class ligacaoSimples: public Ligacao {
 
       }
 
-
+ bool ligacaoSimples:: isSimples() {
+   return true;
+ }
 
 
 #endif // LIGACAOSIMPLES_H

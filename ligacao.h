@@ -15,6 +15,7 @@ class Ligacao {
       virtual Data getDia()=0;
       virtual double getCusto()=0;
       virtual ~Ligacao(){}
+      virtual bool isSimples()=0;
 
 
 
