@@ -31,7 +31,10 @@ class Celular {
      void printNumero();
      void ligar(Data& d,double duraM,double duraS=0);
      double getCreditos ();
+     double getDados();
      void registroChamadas ();
+      void registroDados ();
+     void transferirDados (Data& d,double Bits);
 
 
 
@@ -72,6 +75,13 @@ void Celular::printNumero() {
 
 double Celular::getCreditos() {
     return creditos;
+}
+
+double Celular::getDados() {
+    if(p->isPrepago()==true)
+         return dados;
+     else
+    return dynamic_cast<posPago*> (p)->getFran();
 }
 
 
@@ -146,6 +156,71 @@ void Celular:: registroChamadas () { //so printa ligaçao simples
 
 
 }
+
+
+void Celular::transferirDados (Data& d,double Bits) {
+
+      double dadosConsumidos,custo;
+
+     if(p->isPrepago()==true) { //condição de pre pago
+
+         if(dados==0)
+             throw (Exception("Seu pacote de dados chegou ao fim"));
+
+
+
+         if(Bits>=dados){
+             dadosConsumidos=dados;
+             dados=0;
+
+         } else {
+          dadosConsumidos=Bits;
+          dados-=Bits;
+
+        }
+
+
+    }  else {  //condição de pos pago
+       dadosConsumidos=Bits;
+       dynamic_cast<posPago*>(p)->quitarInternet (dadosConsumidos,d);
+       dados=dynamic_cast<posPago*>(p)->getFran();
+
+    }
+
+
+
+     Ligacao *l=new ligacaoDados(dadosConsumidos,d);
+         registro.push_back(l);
+
+
+
+
+
+}
+
+
+void Celular::registroDados (){
+
+ for (int k=0;k<registro.size();k++) {
+
+     if(registro[k]->isSimples()==false) {
+        cout<<"Data do uso: "<<registro[k]->getDia().getDia() <<"/"<<registro[k]->getDia().getMes();
+        cout<<"/"<<registro[k]->getDia().getAno()<<endl;
+
+        cout<<"Dados consumidos: "<<dynamic_cast<ligacaoDados*>(registro[k])->getDadosCon( )<<" Mbs"<<endl;
+
+        cout<<endl;
+     }
+
+ }
+
+
+
+
+
+
+}
+
 
 
 #endif // CELULAR_H

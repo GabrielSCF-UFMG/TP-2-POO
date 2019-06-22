@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1561168763 source:c:\users\55319\desktop\tp-operadora\main.cpp
+1561168843 source:c:\users\55319\desktop\tp-operadora\main.cpp
 	<iostream>
 	"Celular.h"
 
@@ -34,7 +34,7 @@
 1561168555 c:\users\55319\desktop\tp-operadora\ligacaosimples.h
 	"Ligacao.h"
 
-1561168798 c:\users\55319\desktop\tp-operadora\celular.h
+1561172729 c:\users\55319\desktop\tp-operadora\celular.h
 	"prePago.h"
 	"posPago.h"
 	"ligacaoDados.h"
