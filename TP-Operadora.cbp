@@ -33,6 +33,7 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="Celular.h" />
+		<Unit filename="Cliente.h" />
 		<Unit filename="Data.h" />
 		<Unit filename="Exception.h" />
 		<Unit filename="Plano.h" />

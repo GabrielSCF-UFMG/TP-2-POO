@@ -1,7 +1,7 @@
 # depslib dependency file v1.0
-1561211603 source:c:\users\55319\desktop\tp-operadora\main.cpp
+1561229074 source:c:\users\55319\desktop\tp-operadora\main.cpp
 	<iostream>
-	"Celular.h"
+	"Cliente.h"
 
 1561207155 c:\users\55319\desktop\tp-operadora\pospago.h
 	"Data.h"
@@ -44,4 +44,7 @@
 	<stdlib.h>
 	<time.h>
 	<algorithm>
+
+1561228880 c:\users\55319\desktop\tp-operadora\cliente.h
+	"Celular.h"
 
