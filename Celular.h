@@ -32,9 +32,12 @@ class Celular {
      void ligar(Data& d,double duraM,double duraS=0);
      double getCreditos ();
      double getDados();
+     Plano* getPlano();
      void registroChamadas ();
-      void registroDados ();
+     void registroDados ();
      void transferirDados (Data& d,double Bits);
+     void renovarPagamento(Data &d,double pay=0);// serve para os dois tipos de planos
+     void comprarDados(Data &d,double c);
 
 
 
@@ -54,6 +57,9 @@ class Celular {
 
 
      std::random_shuffle ( numero.begin(), numero.end() );
+
+     if(p->isPrepago()==false)
+           dados+=p->getFran();//celular pos pago pode ser iniciado com pacote de dados iniciais, mas vai receber aquilo que está contido no plano também
 
 
 
@@ -86,6 +92,10 @@ double Celular::getDados() {
 
 
 void Celular::ligar(Data& d,double duraM,double duraS)  {
+
+     if(p->foraDaValidade(d))
+         throw(Exception("Pendencia de pagamento, coloque creditos ou renove seu plano") );
+
 
      double custo, tempoChamada;
      double Ttotal=duraM+duraS/60;
@@ -161,6 +171,8 @@ void Celular:: registroChamadas () { //so printa ligaçao simples
 void Celular::transferirDados (Data& d,double Bits) {
 
       double dadosConsumidos,custo;
+      if(p->foraDaValidade(d))
+         throw(Exception("Pendencia de pagamento, coloque creditos ou renove seu plano") );
 
      if(p->isPrepago()==true) { //condição de pre pago
 
@@ -182,8 +194,15 @@ void Celular::transferirDados (Data& d,double Bits) {
 
     }  else {  //condição de pos pago
        dadosConsumidos=Bits;
-       dynamic_cast<posPago*>(p)->quitarInternet (dadosConsumidos,d);
-       dados=dynamic_cast<posPago*>(p)->getFran();
+       if(dadosConsumidos>dados)
+         throw(Exception("pacote de dados chegou ao fim") );
+       else if (dadosConsumidos==dados)
+             dados=0;
+        else
+          dados-=dadosConsumidos;
+
+
+
 
     }
 
@@ -215,11 +234,51 @@ void Celular::registroDados (){
  }
 
 
+}
 
 
+void Celular::renovarPagamento(Data &d,double pay) {
+
+
+  if(p->isPrepago()) {
+    creditos=pay;
+      p->setVal(d);
+
+  } else {
+
+     dynamic_cast<posPago*>(p)->setVal(d);
+
+
+  }
 
 
 }
+
+void Celular::comprarDados(Data &d,double c) {
+   if(p->foraDaValidade(d))
+       throw(Exception("Pendencia de pagamento, coloque creditos ou renove seu plano") );
+   if(p->isPrepago()) {
+       double preco=dynamic_cast<prePago*>(p)->custoDeInternet ();
+       preco*=c;
+
+       if(preco>creditos)
+           throw(Exception("Voce nao possui creditos para realizar esta operacao") );
+       else {
+          dados+=c;
+          creditos-=preco;
+
+       }
+    }
+    else
+       throw(Exception("Essa operacao nao e permitida para seu plano"));
+
+}
+
+Plano* Celular::getPlano() {
+    return p;
+
+}
+
 
 
 

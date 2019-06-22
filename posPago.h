@@ -14,15 +14,14 @@
         string nome;
         double preco;
         double pacoteDeDados;//mb
-        double veloInternet;//mb/s
         Data vencimento;
-        const double reduz=0.5;
+
 
      public:
 
      //construtores/destrutores
 
-     posPago(string n,double p,double pd, double vel, Data &v);
+     posPago(string n,double p,double pd, Data &v);
      posPago(const posPago &b);
      ~posPago();
      //getters
@@ -39,8 +38,7 @@
        double getFran() ;
        double custoDeChamada() ;
        bool foraDaValidade(Data& now );
-       void quitarInternet (double valor,Data& now);
-       void setValidade( ) ;
+       void setVal(const Data& dataPag);
 
 
 
@@ -49,11 +47,11 @@
 //construtores/destrutores
 
 
-    posPago::posPago(string n,double p,double pd, double vel, Data &v): nome(n),preco(p),pacoteDeDados(pd),
-    veloInternet(vel),vencimento(v) {}
+    posPago::posPago(string n,double p,double pd, Data &v): nome(n),preco(p),pacoteDeDados(pd),
+vencimento(v) {}
 
     posPago::posPago(const posPago &b):nome(b.nome),preco(b.preco),
-    pacoteDeDados(b.pacoteDeDados),veloInternet(b.veloInternet),vencimento(b.vencimento) {}
+    pacoteDeDados(b.pacoteDeDados),vencimento(b.vencimento) {}
 
     posPago::  ~posPago(){}
 
@@ -63,9 +61,7 @@
         return nome;
     }
 
-    double posPago::getVelocidade() {
-        return veloInternet;
-    }
+
 
     int posPago::getVal() {
         return vencimento.getDia();
@@ -115,30 +111,13 @@
    }
 
 
-    void posPago::quitarInternet (double valor,Data& now){
-
-         if(this->foraDaValidade(now)) {
-             throw(Exception("Pendencia de pagamento"));
-
-         } else {
-
-             if(valor<pacoteDeDados)
-                 pacoteDeDados-=valor;
-             else {
-                pacoteDeDados=0;
-                veloInternet=veloInternet*reduz;
-                throw(Exception("Pacote de dados todos consumidos, internet com velocidade reduzida"));
-             }
-
-         }
 
 
-    }
+
+ void posPago::setVal(const Data& dataPag) {
 
 
-  void posPago::setValidade( ) {
-
-
+            vencimento=dataPag;
             vencimento.setDia(30);
 
 

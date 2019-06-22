@@ -32,6 +32,7 @@ class prePago: public Plano {
          string getNome() ;
        //setters
         void setFran(double const &c);
+        void setVal(const Data &dataPag);
 
 
        //funções de funcionalidade
@@ -131,7 +132,13 @@ int prePago:: getTempoVal(){
 }
 
 
+void prePago::setVal(const Data &dataPag) {
 
+    validade=dataPag;
+    validade.setDia(tempoValidade);
+
+
+}
 
 
 
