@@ -75,8 +75,9 @@ public:
         //Lista todos os clientes,
         //seus respectivos celulares,
         //suas ligacoes e o preco.
-        //No final mostra se os creditos
-        //de cada celular.
+        //No final mostra os creditos
+        //de cada celular e a validade
+        //do plano.
 
     }
 
